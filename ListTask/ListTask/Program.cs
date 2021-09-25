@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Models;
 using Repository;
@@ -11,11 +12,15 @@ namespace Models
         public string About { get; set; }
         public DateTime DateAdd { get; set; }
         public DateTime DateDead { get; set; }
+
         public MainTask(string name, string about,DateTime dateadd, DateTime datedead)
         {
             Name = name;
-            About = about; DateAdd = dateadd; DateDead = datedead;
+            About = about; 
+            DateAdd = dateadd; 
+            DateDead = datedead;
         }
+
         public void Show()
         {
             Console.WriteLine("Id " + Id + " Name " + Name + " About " + About + "\nDateAdd " + DateAdd + " DateDead " + DateDead);
@@ -28,12 +33,16 @@ namespace Repository
     class LocalDataRepository
     {
         public List<MainTask> TaskRepository;
+
         public LocalDataRepository() { TaskRepository = new List<MainTask>(); }
+
         public LocalDataRepository(int size) { TaskRepository = new List<MainTask>(size); }
+
         public void Addmethod(MainTask taskRepository)
         {
             TaskRepository.Add(taskRepository);
         }
+
         public void Deletemethod(Guid taskRepository)
         {
             int tmp = 0;
@@ -50,6 +59,7 @@ namespace Repository
             if (tmp != 1) Console.WriteLine("Удаление не выполнена, такого имени нет");
 
         }
+
         public void Print()
         {
             foreach (var i in TaskRepository)
@@ -57,9 +67,43 @@ namespace Repository
                 i.Show();
             }
         }
+
         public void DeleteAll()
         {
             TaskRepository.Clear();
+        }
+
+    }
+    class LocalKeyValueRepository
+    {
+        public Dictionary<Guid,MainTask> KeyTaskRepository;
+
+        public LocalKeyValueRepository() { KeyTaskRepository = new Dictionary<Guid, MainTask>(); }
+
+        public LocalKeyValueRepository(int size) { KeyTaskRepository = new Dictionary<Guid, MainTask>(size); }
+
+        public void Addmethod(Guid id,MainTask taskRepository)
+        {
+            KeyTaskRepository.Add(id,taskRepository);
+        }
+
+        public void Deletemethod(Guid id)
+        {
+            KeyTaskRepository.Remove(id);
+        }
+
+        public void Print(Dictionary<Guid, MainTask> taskRepository)
+        {
+            for(int i=0;i<taskRepository.Count;i++)
+            {
+                KeyValuePair<Guid, MainTask> entry = taskRepository.ElementAt(i);
+                Console.WriteLine(entry.Key + " : " + entry.Value);
+            }
+        }
+
+        public void DeleteAll()
+        {
+            KeyTaskRepository.Clear();
         }
 
     }

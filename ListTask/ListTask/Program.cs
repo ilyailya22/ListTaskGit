@@ -4,17 +4,17 @@ using Models;
 using Repository;
 namespace Models
 {
-    class MainTasks
+    class MainTask
     {
         public Guid Id = Guid.NewGuid();
-        public string Name;
-        public string About;
-        public DateTime DateAdd;
-        public DateTime DateDead;
-        public MainTasks(string n, string a,DateTime da, DateTime dd)
+        public string Name { get; set; }
+        public string About { get; set; }
+        public DateTime DateAdd { get; set; }
+        public DateTime DateDead { get; set; }
+        public MainTask(string name, string about,DateTime dateadd, DateTime datedead)
         {
-            Name = n;
-            About = a; DateAdd = da; DateDead = dd;
+            Name = name;
+            About = about; DateAdd = dateadd; DateDead = datedead;
         }
         public void Show()
         {
@@ -25,21 +25,21 @@ namespace Models
 }
 namespace Repository
 {
-    class Repositories
+    class LocalDataRepository
     {
-        public List<MainTasks> TaskRepository;
-        public Repositories() { TaskRepository = new List<MainTasks>(); }
-        public Repositories(int n) { TaskRepository = new List<MainTasks>(n); }
-        public void Addmethod(MainTasks a)
+        public List<MainTask> TaskRepository;
+        public LocalDataRepository() { TaskRepository = new List<MainTask>(); }
+        public LocalDataRepository(int size) { TaskRepository = new List<MainTask>(size); }
+        public void Addmethod(MainTask taskRepository)
         {
-            TaskRepository.Add(a);
+            TaskRepository.Add(taskRepository);
         }
-        public void Deletemethod(Guid a)
+        public void Deletemethod(Guid taskRepository)
         {
             int tmp = 0;
             foreach (var i in TaskRepository)
             {
-                if (i.Id == a)
+                if (i.Id == taskRepository)
                 {
                     tmp = 1;
                     TaskRepository.Remove(i);
@@ -73,18 +73,18 @@ namespace Main
         {
             DateTime dateadd1 = new DateTime(2002, 11, 06, 17, 30, 00);
             DateTime datedead1 = new DateTime(2003, 11, 06, 17, 30, 00);
-            Repositories repository = new Repositories();
-            MainTasks models1 = new MainTasks("", "", dateadd1, datedead1);
+            LocalDataRepository repository = new LocalDataRepository();
+            MainTask models1 = new MainTask("", "", dateadd1, datedead1);
             repository.Addmethod(models1);
             DateTime dateadd2 = new DateTime(2002, 9, 06, 00, 00, 00);
             DateTime datedead2 = new DateTime(2003, 9, 06, 00, 00, 00);
-            MainTasks models2 = new MainTasks("", "", dateadd2, datedead2);
+            MainTask models2 = new MainTask("", "", dateadd2, datedead2);
             repository.Addmethod(models2);
             repository.Print();
             repository.DeleteAll();
             DateTime dateadd3 = new DateTime(2000, 1, 01, 00, 00, 00);
             DateTime datedead3 = new DateTime(2001, 2, 12, 00, 00, 00);
-            MainTasks models3 = new MainTasks("", "", dateadd3, datedead3);
+            MainTask models3 = new MainTask("", "", dateadd3, datedead3);
             repository.Addmethod(models3);
             repository.Print();
             Console.ReadKey();

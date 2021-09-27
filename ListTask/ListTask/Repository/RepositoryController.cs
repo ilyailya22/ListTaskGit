@@ -1,5 +1,4 @@
-﻿using Ninject;
-using Models;
+﻿using Models;
 using System;
 
 namespace Repository

@@ -26,6 +26,10 @@ namespace Repository
         {
             _repository.DeleteAll();
         }
+        public void PrintMethod()
+        {
+            _repository.Print();
+        }
     }
 }
 

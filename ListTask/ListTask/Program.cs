@@ -150,6 +150,7 @@ namespace Main
             var bootstrapper = new Bootstrapper();
             var localDataRepository = new RepositoryController(Bootstrapper.Kernel.Get<IRepository>());
             localDataRepository.Add(models1);
+            localDataRepository.PrintMethod();
             Console.ReadKey();
         }
     }

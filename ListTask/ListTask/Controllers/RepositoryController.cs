@@ -1,7 +1,8 @@
-﻿using Models;
+﻿using ListTask.Models;
 using System;
+using ListTask.Repository;
 
-namespace Repository
+namespace ListTask.Controllers
 {
     public class RepositoryController
     {

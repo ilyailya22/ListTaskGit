@@ -1,5 +1,6 @@
 ﻿using Ninject;
-namespace Repository
+using ListTask.Repository;
+namespace ListTask.Models
 {
     public class Bootstrapper
     {

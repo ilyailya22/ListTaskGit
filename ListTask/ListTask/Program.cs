@@ -1,7 +1,8 @@
 ﻿using System;
-using Models;
+using ListTask.Models;
 using Ninject;
-using Repository;
+using ListTask.Repository;
+using ListTask.Controllers;
 namespace Main
 {
     class Program

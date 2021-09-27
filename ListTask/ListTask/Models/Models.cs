@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Models
+namespace ListTask.Models
 {
     public class MainTask
     {

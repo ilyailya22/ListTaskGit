@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Collections.Generic;
 using Models;
+using Ninject;
 using Repository;
+
 namespace Models
 {
-    class MainTask
+    public class MainTask
     {
         public Guid Id = Guid.NewGuid();
         public string Name { get; set; }
@@ -30,7 +32,17 @@ namespace Models
 }
 namespace Repository
 {
-    class LocalDataRepository
+    public interface IRepository
+    {
+        void Addmethod(MainTask taskRepository);
+
+        void Deletemethod(Guid taskRepository);
+
+        void DeleteAll();
+
+        void Print();
+    }
+    public class LocalDataRepository : IRepository
     {
         public List<MainTask> TaskRepository;
 
@@ -74,7 +86,7 @@ namespace Repository
         }
 
     }
-    class LocalKeyValueRepository
+    public class LocalKeyValueRepository : IRepository
     {
         public Dictionary<Guid,MainTask> KeyTaskRepository;
 
@@ -82,8 +94,9 @@ namespace Repository
 
         public LocalKeyValueRepository(int size) { KeyTaskRepository = new Dictionary<Guid, MainTask>(size); }
 
-        public void Addmethod(Guid id,MainTask taskRepository)
+        public void Addmethod(MainTask taskRepository)
         {
+            Guid id = Guid.NewGuid();
             KeyTaskRepository.Add(id,taskRepository);
         }
 
@@ -92,11 +105,11 @@ namespace Repository
             KeyTaskRepository.Remove(id);
         }
 
-        public void Print(Dictionary<Guid, MainTask> taskRepository)
+        public void Print()
         {
-            for(int i=0;i<taskRepository.Count;i++)
+            for(int i=0;i< KeyTaskRepository.Count;i++)
             {
-                KeyValuePair<Guid, MainTask> entry = taskRepository.ElementAt(i);
+                KeyValuePair<Guid, MainTask> entry = KeyTaskRepository.ElementAt(i);
                 Console.WriteLine(entry.Key + " : " + entry.Value);
             }
         }
@@ -131,6 +144,12 @@ namespace Main
             MainTask models3 = new MainTask("", "", dateadd3, datedead3);
             repository.Addmethod(models3);
             repository.Print();
+
+
+
+            var bootstrapper = new Bootstrapper();
+            var localDataRepository = new RepositoryController(Bootstrapper.Kernel.Get<IRepository>());
+            localDataRepository.Add(models1);
             Console.ReadKey();
         }
     }

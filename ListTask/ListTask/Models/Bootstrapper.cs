@@ -15,7 +15,7 @@ namespace ListTask.Models
 
         private void InitializeDependencies()
         {
-            Kernel.Bind<IRepository>().To<LocalKeyValueRepository>();
+            Kernel.Bind<IRepository>().To<WebAppRepository>();
         }
     }
 }

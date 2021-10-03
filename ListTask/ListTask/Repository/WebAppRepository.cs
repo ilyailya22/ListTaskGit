@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using ListTask.Models;
 using System.Threading.Tasks;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ListTask.Repository
 {
@@ -14,13 +15,13 @@ namespace ListTask.Repository
 
         public async void Addmethod(MainTask taskRepository)
         {
-            string jsonString = JsonSerializer.Serialize(taskRepository);
+            string jsonString = JsonConvert.SerializeObject(taskRepository);
             await WebTaskRepository.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
         }
 
         public async void Deletemethod(Guid taskRepository)
         {
-            string jsonString = JsonSerializer.Serialize(WebTaskRepository);
+            string jsonString = JsonConvert.SerializeObject(WebTaskRepository);
             await WebTaskRepository.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask",jsonString);
         }
 
@@ -28,7 +29,13 @@ namespace ListTask.Repository
         {
             string jsonString = await WebTaskRepository.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
             MainTaskJson webTaskRepository =
-                JsonSerializer.Deserialize<MainTaskJson>(jsonString);
+                JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
+            MainTask task = new MainTask();
+            foreach (var i in webTaskRepository.Task)
+            {
+                task = i;
+                task.Show();
+            }
         }
         public void DeleteAll()
         {

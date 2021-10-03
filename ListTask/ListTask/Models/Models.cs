@@ -23,15 +23,6 @@ namespace ListTask.Models
         public DateTime DateAdd { get; set; }
         [JsonProperty("dateDeadline")]
         public DateTime DateDead { get; set; }
-
-        public MainTask(string name, string about, DateTime dateadd, DateTime datedead)
-        {
-            Name = name;
-            About = about;
-            DateAdd = dateadd;
-            DateDead = datedead;
-        }
-
         public void Show()
         {
             Console.WriteLine("Id " + Id + " Name " + Name + " About " + About + "\nDateAdd " + DateAdd + " DateDead " + DateDead);

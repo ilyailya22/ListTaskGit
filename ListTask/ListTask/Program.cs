@@ -12,7 +12,7 @@ namespace Main
             DateTime dateadd1 = new DateTime(2002, 11, 06, 17, 30, 00);
             DateTime datedead1 = new DateTime(2003, 11, 06, 17, 30, 00);
             //LocalDataRepository repository = new LocalDataRepository();
-            MainTask models1 = new MainTask("Ilya", "Merihov", dateadd1, datedead1);
+            MainTask models1 = new MainTask();
             //repository.Addmethod(models1);
             //DateTime dateadd2 = new DateTime(2002, 9, 06, 00, 00, 00);
             //DateTime datedead2 = new DateTime(2003, 9, 06, 00, 00, 00);

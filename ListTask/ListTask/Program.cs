@@ -3,7 +3,6 @@ using ListTask.Models;
 using Ninject;
 using ListTask.Repository;
 using ListTask.Controllers;
-using System.Text.Json;
 namespace Main
 {
     class Program
@@ -26,9 +25,6 @@ namespace Main
             //MainTask models3 = new MainTask("", "", dateadd3, datedead3);
             //repository.Addmethod(models3);
             //repository.Print();
-
-
-
             var bootstrapper = new Bootstrapper();
             var localDataRepository = new RepositoryController(Bootstrapper.Kernel.Get<IRepository>());
             localDataRepository.Add(models1);

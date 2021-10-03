@@ -12,21 +12,23 @@ namespace ListTask.Repository
 
         public WebAppRepository() { WebTaskRepository = new RequestService(); }
 
-        public void Addmethod(MainTask taskRepository)
+        public async void Addmethod(MainTask taskRepository)
         {
             string jsonString = JsonSerializer.Serialize(taskRepository);
-            WebTaskRepository.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
+            await WebTaskRepository.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
         }
 
-        public void Deletemethod(Guid taskRepository)
+        public async void Deletemethod(Guid taskRepository)
         {
             string jsonString = JsonSerializer.Serialize(WebTaskRepository);
-            WebTaskRepository.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask",jsonString);
+            await WebTaskRepository.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask",jsonString);
         }
 
-        public void Print()
+        public async void Print()
         {
-                WebTaskRepository.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
+            string jsonString = await WebTaskRepository.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
+            MainTaskJson webTaskRepository =
+                JsonSerializer.Deserialize<MainTaskJson>(jsonString);
         }
         public void DeleteAll()
         {

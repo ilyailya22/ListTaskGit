@@ -6,37 +6,46 @@ namespace ListTask.Repository
 {
     public class LocalDataRepository : IRepository
     {
-        public List<MainTask> TaskRepository;
+        private List<MainTask> _taskRepository;
 
-        public LocalDataRepository() { TaskRepository = new List<MainTask>(); }
+        public LocalDataRepository()
+        {
+            _taskRepository = new List<MainTask>();
+        }
 
-        public LocalDataRepository(int size) { TaskRepository = new List<MainTask>(size); }
+        public LocalDataRepository(int size)
+        {
+            _taskRepository = new List<MainTask>(size);
+        }
 
         public void Addmethod(MainTask taskRepository)
         {
-            TaskRepository.Add(taskRepository);
+            _taskRepository.Add(taskRepository);
         }
 
         public void Deletemethod(Guid taskRepository)
         {
             int tmp = 0;
-            foreach (var i in TaskRepository)
+            foreach (var i in _taskRepository)
             {
                 if (i.Id == taskRepository)
                 {
                     tmp = 1;
-                    TaskRepository.Remove(i);
+                    _taskRepository.Remove(i);
                     Console.WriteLine("Удаление успешно выполнено");
                     break;
                 }
             }
-            if (tmp != 1) Console.WriteLine("Удаление не выполнена, такого имени нет");
 
+            if (tmp != 1)
+            {
+                Console.WriteLine("Удаление не выполнена, такого имени нет");
+            }
         }
 
         public void Print()
         {
-            foreach (var i in TaskRepository)
+            foreach (var i in _taskRepository)
             {
                 i.Show();
             }
@@ -44,8 +53,7 @@ namespace ListTask.Repository
 
         public void DeleteAll()
         {
-            TaskRepository.Clear();
+            _taskRepository.Clear();
         }
-
     }
 }

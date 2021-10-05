@@ -1,5 +1,5 @@
-﻿using ListTask.Models;
-using System;
+﻿using System;
+using ListTask.Models;
 using ListTask.Repository;
 
 namespace ListTask.Controllers
@@ -17,19 +17,20 @@ namespace ListTask.Controllers
         {
             _repository.Addmethod(taskRepository);
         }
+
         public void Delete(Guid id)
         {
             _repository.Deletemethod(id);
-
         }
+
         public void DeleteAl()
         {
             _repository.DeleteAll();
         }
+
         public void PrintMethod()
         {
             _repository.Print();
         }
     }
 }
-

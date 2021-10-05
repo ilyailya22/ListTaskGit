@@ -1,43 +1,47 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using ListTask.Models;
-using System.Threading.Tasks;
 
 namespace ListTask.Repository
 {
     public class LocalKeyValueRepository : IRepository
     {
-        public Dictionary<Guid, MainTask> KeyTaskRepository;
+        private Dictionary<Guid, MainTask> _keyTaskRepository;
 
-        public LocalKeyValueRepository() { KeyTaskRepository = new Dictionary<Guid, MainTask>(); }
+        public LocalKeyValueRepository()
+        {
+            _keyTaskRepository = new Dictionary<Guid, MainTask>();
+        }
 
-        public LocalKeyValueRepository(int size) { KeyTaskRepository = new Dictionary<Guid, MainTask>(size); }
+        public LocalKeyValueRepository(int size)
+        {
+            _keyTaskRepository = new Dictionary<Guid, MainTask>(size);
+        }
 
         public void Addmethod(MainTask taskRepository)
         {
             Guid id = Guid.NewGuid();
-            KeyTaskRepository.Add(id, taskRepository);
+            _keyTaskRepository.Add(id, taskRepository);
         }
 
         public void Deletemethod(Guid id)
         {
-            KeyTaskRepository.Remove(id);
+            _keyTaskRepository.Remove(id);
         }
 
         public void Print()
         {
-            for (int i = 0; i < KeyTaskRepository.Count; i++)
+            for (int i = 0; i < _keyTaskRepository.Count; i++)
             {
-                KeyValuePair<Guid, MainTask> entry = KeyTaskRepository.ElementAt(i);
+                KeyValuePair<Guid, MainTask> entry = _keyTaskRepository.ElementAt(i);
                 Console.WriteLine(entry.Key + " : " + entry.Value);
             }
         }
 
         public void DeleteAll()
         {
-            KeyTaskRepository.Clear();
+            _keyTaskRepository.Clear();
         }
-
     }
 }

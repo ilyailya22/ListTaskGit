@@ -1,14 +1,14 @@
 ﻿using ListTask.Repository;
+using ListTask.Services;
 using Ninject;
 
-namespace ListTask.Models
+namespace ListTask
 {
     public class Bootstrapper
     {
         public Bootstrapper()
         {
             Kernel = new StandardKernel();
-
             InitializeDependencies();
         }
 
@@ -16,6 +16,7 @@ namespace ListTask.Models
 
         private void InitializeDependencies()
         {
+            Kernel.Bind<IRequestService>().To<RequestService>();
             Kernel.Bind<IRepository>().To<WebAppRepository>();
         }
     }

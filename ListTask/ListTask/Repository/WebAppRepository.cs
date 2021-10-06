@@ -1,16 +1,17 @@
 ﻿using System;
 using ListTask.Models;
+using ListTask.Services;
 using Newtonsoft.Json;
 
 namespace ListTask.Repository
 {
     public class WebAppRepository : IRepository
     {
-        private RequestService _webTaskRepository;
+        private IRequestService _requestService;
 
-        public WebAppRepository()
+        public WebAppRepository(IRequestService service)
         {
-            _webTaskRepository = new RequestService();
+            _requestService = service;
         }
 
         public async void Addmethod(MainTask taskRepository)
@@ -18,7 +19,7 @@ namespace ListTask.Repository
                 string jsonString = JsonConvert.SerializeObject(taskRepository);
                 try
                 {
-                    await _webTaskRepository.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
+                    await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
                 }
                 catch (ArgumentException ex)
                 {
@@ -28,10 +29,10 @@ namespace ListTask.Repository
 
         public async void Deletemethod(Guid taskRepository)
         {
-                string jsonString = JsonConvert.SerializeObject(_webTaskRepository);
+                string jsonString = JsonConvert.SerializeObject(_requestService);
                 try
                 {
-                    await _webTaskRepository.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask", jsonString);
+                    await _requestService.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask", jsonString);
                 }
                 catch (ArgumentException ex)
                 {
@@ -43,7 +44,7 @@ namespace ListTask.Repository
         {
                 try
                 {
-                    string jsonString = await _webTaskRepository.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
+                    string jsonString = await _requestService.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
                     MainTaskJson webTaskRepository =
                     JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
                     MainTask task = new MainTask();

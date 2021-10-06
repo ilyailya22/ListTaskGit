@@ -26,5 +26,10 @@ namespace ListTask.Models
         {
             Console.WriteLine("Id " + Id + " Name " + Name + " About " + About + "\nDateAdd " + DateAdd + " DateDead " + DateDead);
         }
+
+        public void ShowNameDate()
+        {
+            Console.WriteLine(Name + " - " + DateDead);
+        }
     }
 }

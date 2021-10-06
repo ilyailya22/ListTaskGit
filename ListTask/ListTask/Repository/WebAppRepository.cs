@@ -15,8 +15,6 @@ namespace ListTask.Repository
 
         public async void Addmethod(MainTask taskRepository)
         {
-            try
-            {
                 string jsonString = JsonConvert.SerializeObject(taskRepository);
                 try
                 {
@@ -26,17 +24,10 @@ namespace ListTask.Repository
                 {
                     Console.WriteLine(ex.Message);
                 }
-            }
-            catch (InvalidCastException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         public async void Deletemethod(Guid taskRepository)
         {
-            try
-            {
                 string jsonString = JsonConvert.SerializeObject(_webTaskRepository);
                 try
                 {
@@ -46,20 +37,13 @@ namespace ListTask.Repository
                 {
                     Console.WriteLine(ex.Message);
                 }
-            }
-            catch (InvalidCastException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         public async void Print()
         {
-            try
-            {
-                string jsonString = await _webTaskRepository.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
                 try
                 {
+                    string jsonString = await _webTaskRepository.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
                     MainTaskJson webTaskRepository =
                     JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
                     MainTask task = new MainTask();
@@ -69,15 +53,10 @@ namespace ListTask.Repository
                         task.Show();
                     }
                 }
-                catch (InvalidCastException ex)
+                catch (ArgumentException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         public void DeleteAll()

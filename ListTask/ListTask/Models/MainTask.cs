@@ -22,6 +22,9 @@ namespace ListTask.Models
         [JsonProperty("dateDeadline")]
         public DateTime DateDead { get; set; }
 
+        [JsonProperty("children")]
+        public List<SubTask> Task { get; set; }
+
         public void Show()
         {
             Console.WriteLine("Id " + Id + " Name " + Name + " About " + About + "\nDateAdd " + DateAdd + " DateDead " + DateDead);

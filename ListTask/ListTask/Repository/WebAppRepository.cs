@@ -47,11 +47,21 @@ namespace ListTask.Repository
                 string jsonString = await _requestService.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
                 MainTaskJson mainTaskRepository =
                 JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
-                MainTask mainTask = new MainTask();
+                MainTask mainTaskobj = new MainTask();
+                SubTask subTaskobj = new SubTask();
+                int numberTask = 1;
                 foreach (var i in mainTaskRepository.Task)
                 {
-                    mainTask = i;
-                    mainTask.ShowNameDate();
+                    mainTaskobj = i;
+                    Console.Write(numberTask + ". ");
+                    mainTaskobj.ShowNameDate();
+                    numberTask++;
+                    foreach (var j in mainTaskobj.Task)
+                    {
+                        subTaskobj = j;
+                        Console.Write("\t");
+                        subTaskobj.ShowNameDate();
+                    }
                 }
             }
             catch (ArgumentException ex)

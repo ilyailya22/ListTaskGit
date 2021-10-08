@@ -5,34 +5,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace ListTask.Models
 {
-    public class MainTask
+    public class MainTask : BaseTask
     {
-        [JsonProperty("id")]
-        public Guid Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("about")]
-        public string About { get; set; }
-
-        [JsonProperty("dateAdd")]
-        public DateTime DateAdd { get; set; }
-
-        [JsonProperty("dateDeadline")]
-        public DateTime DateDead { get; set; }
-
         [JsonProperty("children")]
-        public List<SubTask> Task { get; set; }
-
-        public void Show()
-        {
-            Console.WriteLine("Id " + Id + " Name " + Name + " About " + About + "\nDateAdd " + DateAdd + " DateDead " + DateDead);
-        }
-
-        public void ShowNameDate()
-        {
-            Console.WriteLine(Name + " - " + DateDead);
-        }
+        public List<SubTask> Children { get; set; }
     }
 }

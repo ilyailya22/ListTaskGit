@@ -16,27 +16,27 @@ namespace ListTask.Repository
 
         public async void Addmethod(MainTask taskRepository)
         {
-            string jsonString = JsonConvert.SerializeObject(taskRepository);
             try
             {
+                string jsonString = JsonConvert.SerializeObject(taskRepository);
                 await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
             }
-            catch (ArgumentException ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(typeof(Exception));
             }
         }
 
         public async void Deletemethod(Guid taskRepository)
         {
-            string jsonString = JsonConvert.SerializeObject(_requestService);
             try
             {
+                string jsonString = JsonConvert.SerializeObject(_requestService);
                 await _requestService.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask", jsonString);
             }
-            catch (ArgumentException ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(typeof(Exception));
             }
         }
 
@@ -56,7 +56,7 @@ namespace ListTask.Repository
                     Console.Write(numberTask + ". ");
                     mainTaskobj.ShowNameDate();
                     numberTask++;
-                    foreach (var j in mainTaskobj.Task)
+                    foreach (var j in mainTaskobj.Children)
                     {
                         subTaskobj = j;
                         Console.Write("\t");
@@ -64,9 +64,9 @@ namespace ListTask.Repository
                     }
                 }
             }
-            catch (ArgumentException ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(typeof(Exception));
             }
         }
 

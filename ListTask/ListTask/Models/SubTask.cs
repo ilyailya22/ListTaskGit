@@ -5,9 +5,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace ListTask.Models
 {
-    public class MainTask : BaseTask
+    public class SubTask : BaseTask
     {
-        [JsonProperty("children")]
-        public List<SubTask> Children { get; set; }
+        [JsonProperty("parent")]
+        public Guid Parent { get; set; }
     }
 }

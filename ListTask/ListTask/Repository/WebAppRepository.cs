@@ -16,48 +16,58 @@ namespace ListTask.Repository
 
         public async void Addmethod(MainTask taskRepository)
         {
+            try
+            {
                 string jsonString = JsonConvert.SerializeObject(taskRepository);
-                try
-                {
-                    await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(typeof(Exception));
+            }
         }
 
         public async void Deletemethod(Guid taskRepository)
         {
+            try
+            {
                 string jsonString = JsonConvert.SerializeObject(_requestService);
-                try
-                {
-                    await _requestService.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask", jsonString);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                await _requestService.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask", jsonString);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(typeof(Exception));
+            }
         }
 
         public async void Print()
         {
-                try
+            try
+            {
+                string jsonString = await _requestService.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
+                MainTaskJson mainTaskRepository =
+                JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
+                MainTask mainTaskobj = new MainTask();
+                SubTask subTaskobj = new SubTask();
+                int numberTask = 1;
+                foreach (var i in mainTaskRepository.Task)
                 {
-                    string jsonString = await _requestService.GetAsync("https://tasklist.free.beeceptor.com/getAllTasks");
-                    MainTaskJson webTaskRepository =
-                    JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
-                    MainTask task = new MainTask();
-                    foreach (var i in webTaskRepository.Task)
+                    mainTaskobj = i;
+                    Console.Write(numberTask + ". ");
+                    mainTaskobj.ShowNameDate();
+                    numberTask++;
+                    foreach (var j in mainTaskobj.Children)
                     {
-                        task = i;
-                        task.Show();
+                        subTaskobj = j;
+                        Console.Write("\t");
+                        subTaskobj.ShowNameDate();
                     }
                 }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(typeof(Exception));
+            }
         }
 
         public void DeleteAll()

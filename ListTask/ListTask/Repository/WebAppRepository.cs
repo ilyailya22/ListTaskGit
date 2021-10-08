@@ -14,7 +14,7 @@ namespace ListTask.Repository
             _requestService = service;
         }
 
-        public async void Addmethod(MainTask taskRepository)
+        public async void Add(MainTask taskRepository)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace ListTask.Repository
             }
         }
 
-        public async void Deletemethod(Guid taskRepository)
+        public async void Delete(Guid taskRepository)
         {
             try
             {

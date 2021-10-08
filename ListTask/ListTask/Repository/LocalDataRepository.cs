@@ -18,12 +18,12 @@ namespace ListTask.Repository
             _taskRepository = new List<MainTask>(size);
         }
 
-        public void Addmethod(MainTask taskRepository)
+        public void Add(MainTask taskRepository)
         {
             _taskRepository.Add(taskRepository);
         }
 
-        public void Deletemethod(Guid taskRepository)
+        public void Delete(Guid taskRepository)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)

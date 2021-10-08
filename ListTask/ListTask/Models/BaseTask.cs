@@ -7,6 +7,8 @@ namespace ListTask.Models
 {
     public class BaseTask
     {
+        public int Number { get; set; }
+
         [JsonProperty("id")]
         public Guid Id { get; set; }
 

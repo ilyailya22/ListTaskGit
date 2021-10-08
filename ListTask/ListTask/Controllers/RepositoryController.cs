@@ -13,22 +13,22 @@ namespace ListTask.Controllers
             _repository = repository;
         }
 
-        public void Add(MainTask taskRepository)
+        public void Addmethod(MainTask taskRepository)
         {
-            _repository.Addmethod(taskRepository);
+            _repository.Add(taskRepository);
         }
 
-        public void Delete(Guid id)
+        public void Deletemethod(Guid id)
         {
-            _repository.Deletemethod(id);
+            _repository.Delete(id);
         }
 
-        public void DeleteAl()
+        public void DeleteAllmethod()
         {
             _repository.DeleteAll();
         }
 
-        public void PrintMethod()
+        public void Printmethod()
         {
             _repository.Print();
         }

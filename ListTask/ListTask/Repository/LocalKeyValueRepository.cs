@@ -19,13 +19,13 @@ namespace ListTask.Repository
             _keyTaskRepository = new Dictionary<Guid, MainTask>(size);
         }
 
-        public void Addmethod(MainTask taskRepository)
+        public void Add(MainTask taskRepository)
         {
             Guid id = Guid.NewGuid();
             _keyTaskRepository.Add(id, taskRepository);
         }
 
-        public void Deletemethod(Guid id)
+        public void Delete(Guid id)
         {
             _keyTaskRepository.Remove(id);
         }

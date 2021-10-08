@@ -5,9 +5,9 @@ namespace ListTask.Repository
 {
     public interface IRepository
     {
-        void Addmethod(MainTask taskRepository);
+        void Add(MainTask taskRepository);
 
-        void Deletemethod(Guid taskRepository);
+        void Delete(Guid taskRepository);
 
         void DeleteAll();
 

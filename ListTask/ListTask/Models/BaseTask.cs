@@ -7,7 +7,21 @@ namespace ListTask.Models
 {
     public class BaseTask
     {
-        public int Number { get; set; }
+        public BaseTask()
+        {
+        }
+
+        public BaseTask(int number, Guid id, string name, string about, DateTime dateAdd, DateTime dateDead)
+        {
+            Number = number;
+            Id = id;
+            Name = name;
+            About = about;
+            DateAdd = dateAdd;
+            DateDead = dateDead;
+        }
+
+        public int Number { get; set; } = 1;
 
         [JsonProperty("id")]
         public Guid Id { get; set; }

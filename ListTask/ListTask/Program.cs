@@ -13,7 +13,7 @@ namespace Main
         {
             var bootstrapper = new Bootstrapper();
             var localDataRepository = new RepositoryController(Bootstrapper.Kernel.Get<IRepository>());
-            localDataRepository.Printmethod();
+            localDataRepository.Menumethod();
             Console.ReadKey();
         }
     }

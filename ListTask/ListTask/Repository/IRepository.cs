@@ -12,5 +12,7 @@ namespace ListTask.Repository
         void DeleteAll();
 
         void Print();
+
+        void Menu();
     }
 }

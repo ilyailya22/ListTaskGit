@@ -73,5 +73,9 @@ namespace ListTask.Repository
         public void DeleteAll()
         {
         }
+
+        public void Menu()
+        {
+        }
     }
 }

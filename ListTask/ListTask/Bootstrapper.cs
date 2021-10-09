@@ -17,7 +17,7 @@ namespace ListTask
         private void InitializeDependencies()
         {
             Kernel.Bind<IRequestService>().To<RequestService>();
-            Kernel.Bind<IRepository>().To<WebAppRepository>();
+            Kernel.Bind<IRepository>().To<LocalDataRepository>();
         }
     }
 }

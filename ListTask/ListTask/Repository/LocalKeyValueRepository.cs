@@ -43,5 +43,9 @@ namespace ListTask.Repository
         {
             _keyTaskRepository.Clear();
         }
+
+        public void Menu()
+        {
+        }
     }
 }

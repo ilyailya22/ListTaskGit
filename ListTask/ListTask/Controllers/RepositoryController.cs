@@ -32,5 +32,10 @@ namespace ListTask.Controllers
         {
             _repository.Print();
         }
+
+        public void Menumethod()
+        {
+            _repository.Menu();
+        }
     }
 }

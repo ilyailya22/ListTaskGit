@@ -27,7 +27,7 @@ namespace ListTask.Repository
             }
         }
 
-        public async void Delete(Guid taskRepository)
+        public async void Delete(int number)
         {
             try
             {
@@ -70,11 +70,11 @@ namespace ListTask.Repository
             }
         }
 
-        public void DeleteAll()
+        public void PrintByld(int number)
         {
         }
 
-        public void Menu()
+        public void DeleteAll()
         {
         }
     }

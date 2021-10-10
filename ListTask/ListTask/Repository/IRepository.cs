@@ -7,12 +7,12 @@ namespace ListTask.Repository
     {
         void Add(MainTask taskRepository);
 
-        void Delete(Guid taskRepository);
+        void Delete(int number);
 
         void DeleteAll();
 
         void Print();
 
-        void Menu();
+        void PrintByld(int number);
     }
 }

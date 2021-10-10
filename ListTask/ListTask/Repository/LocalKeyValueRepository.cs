@@ -25,9 +25,9 @@ namespace ListTask.Repository
             _keyTaskRepository.Add(id, taskRepository);
         }
 
-        public void Delete(Guid id)
+        public void Delete(int number)
         {
-            _keyTaskRepository.Remove(id);
+            // _keyTaskRepository.Remove(number);
         }
 
         public void Print()
@@ -39,13 +39,15 @@ namespace ListTask.Repository
             }
         }
 
+        public void PrintByld(int number)
+        {
+            KeyValuePair<Guid, MainTask> entry = _keyTaskRepository.ElementAt(number);
+            Console.WriteLine(entry.Key + " : " + entry.Value);
+        }
+
         public void DeleteAll()
         {
             _keyTaskRepository.Clear();
-        }
-
-        public void Menu()
-        {
         }
     }
 }

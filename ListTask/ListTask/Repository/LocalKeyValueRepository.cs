@@ -49,5 +49,9 @@ namespace ListTask.Repository
         {
             _keyTaskRepository.Clear();
         }
+
+        public void Edit(int number, MainTask task)
+        {
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace ListTask.Repository
         {
             foreach (var i in _taskRepository)
             {
-                i.Show();
+                i.ShowNameDate();
             }
         }
 
@@ -60,7 +60,7 @@ namespace ListTask.Repository
                 if (i.Number == number)
                 {
                     tmp = 1;
-                    i.Show();
+                    i.ShowNameDate();
                     Console.WriteLine("Вывод успешно выполнен");
                     break;
                 }
@@ -75,6 +75,20 @@ namespace ListTask.Repository
         public void DeleteAll()
         {
             _taskRepository.Clear();
+        }
+
+        public void Edit(int number, MainTask task)
+        {
+            int count = 0, index = -1;
+            foreach (MainTask s in _taskRepository)
+            {
+                if (s.Number == number)
+                    index = count; // I found a match and I want to edit the item at this index
+                count++;
+            }
+
+            _taskRepository.RemoveAt(index);
+            _taskRepository.Insert(index, task);
         }
     }
 }

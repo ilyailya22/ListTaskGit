@@ -77,5 +77,9 @@ namespace ListTask.Repository
         public void DeleteAll()
         {
         }
+
+        public void Edit(int number, MainTask task)
+        {
+        }
     }
 }

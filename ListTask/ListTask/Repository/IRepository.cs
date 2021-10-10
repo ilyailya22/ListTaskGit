@@ -14,5 +14,7 @@ namespace ListTask.Repository
         void Print();
 
         void PrintByld(int number);
+
+        void Edit(int number, MainTask task);
     }
 }

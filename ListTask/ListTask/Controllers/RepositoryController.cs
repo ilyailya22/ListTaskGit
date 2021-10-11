@@ -91,8 +91,24 @@ namespace ListTask.Controllers
                                 mainTaskobj.Number = int.Parse(Console.ReadLine());
                                 mainTaskobj.Id = Guid.NewGuid();
                                 mainTaskobj.About = Console.ReadLine();
-                                mainTaskobj.DateAdd = DateTime.Parse(Console.ReadLine());
-                                mainTaskobj.DateDead = DateTime.Parse(Console.ReadLine());
+                                if (DateTime.TryParse(Console.ReadLine(), out var datetime))
+                                {
+                                    mainTaskobj.DateAdd = datetime;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Enter correct value");
+                                }
+
+                                if (DateTime.TryParse(Console.ReadLine(), out var datedead))
+                                {
+                                    mainTaskobj.DateDead = datedead;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Enter correct value");
+                                }
+
                                 List<SubTask> subTasks = new List<SubTask>();
                                 Console.WriteLine("SubTask -- ");
                                 Console.WriteLine("Enter Number, About task, Date addition and Date end");
@@ -141,11 +157,35 @@ namespace ListTask.Controllers
                                 Console.WriteLine("MainTask -- ");
                                 Console.WriteLine("Enter Number, About task, Date addition and Date end");
                                 MainTask mainTaskobj = new MainTask();
-                                mainTaskobj.Number = int.Parse(Console.ReadLine());
+                                if (int.TryParse(Console.ReadLine(), out var number))
+                                    {
+                                        mainTaskobj.Number = number;
+                                    }
+                                else
+                                    {
+                                    Console.WriteLine("Enter correct value");
+                                    }
+
                                 mainTaskobj.Id = Guid.NewGuid();
                                 mainTaskobj.About = Console.ReadLine();
-                                mainTaskobj.DateAdd = DateTime.Parse(Console.ReadLine());
-                                mainTaskobj.DateDead = DateTime.Parse(Console.ReadLine());
+                                if (DateTime.TryParse(Console.ReadLine(), out var datetime))
+                                {
+                                    mainTaskobj.DateAdd = datetime;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Enter correct value");
+                                }
+
+                                if (DateTime.TryParse(Console.ReadLine(), out var datedead))
+                                {
+                                    mainTaskobj.DateDead = datedead;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Enter correct value");
+                                }
+
                                 _repository.Add(mainTaskobj);
                             }
                             catch (Exception)
@@ -215,8 +255,17 @@ namespace ListTask.Controllers
                     case Constants.Print:
                         {
                             Console.WriteLine("Enter number to print");
-                            int number = int.Parse(Console.ReadLine());
-                            _repository.PrintByld(number);
+                            int number;
+                            if (int.TryParse(Console.ReadLine(), out var parsenumber))
+                            {
+                                number = parsenumber;
+                                _repository.PrintByld(number);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Enter correct value");
+                            }
+
                             break;
                         }
 
@@ -225,7 +274,16 @@ namespace ListTask.Controllers
                             try
                             {
                                 Console.WriteLine("Enter number to edit");
-                                int number = int.Parse(Console.ReadLine());
+                                int number = 0;
+                                if (int.TryParse(Console.ReadLine(), out var parsenumber))
+                                {
+                                    number = parsenumber;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Enter correct value");
+                                }
+
                                 MainTask mainTaskobj = new MainTask();
                                 Console.WriteLine("MainTask -- ");
                                 mainTaskobj.Number = int.Parse(Console.ReadLine());
@@ -257,8 +315,17 @@ namespace ListTask.Controllers
                     case Constants.Delete:
                         {
                             Console.WriteLine("Enter number to delete");
-                            int number = int.Parse(Console.ReadLine());
-                            _repository.Delete(number);
+                            int number;
+                            if (int.TryParse(Console.ReadLine(), out var parsenumber))
+                            {
+                                number = parsenumber;
+                                _repository.Delete(number);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Enter correct value");
+                            }
+
                             break;
                         }
 

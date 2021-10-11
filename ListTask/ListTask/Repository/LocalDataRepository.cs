@@ -83,7 +83,7 @@ namespace ListTask.Repository
             foreach (MainTask s in _taskRepository)
             {
                 if (s.Number == number)
-                    break; // I found a match and I want to edit the item at this index
+                    break;
                 count++;
             }
 

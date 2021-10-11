@@ -56,33 +56,6 @@ namespace ListTask.Controllers
                 {
                     case Constants.Add:
                         {
-                            /*                         string jsonString =
-                                                        @"{""tasks"" : [
-                                                         ""id"" : ""8a92b9c7-c04d-4d81-9bd8-e2c0e798ce1d"",
-                               ""name"" : ""Create mock api"",
-                               ""about"" : ""Generate mock api call"",
-                               ""dateAdd"" : ""2021-09-28T21:30:00"",
-                               ""dateDeadline"" : ""2021-10-10T21:10:00"",
-                               ""children"" : [
-                                                         ""id"": ""dc787b7f-f0d5-4b73-9b75-2099f62c60d0"",
-                                   ""parent"": ""8a92b9c7-c04d-4d81-9bd8-e2c0e798ce1d"",
-                                   ""name"": ""Create mock api for get"",
-                                   ""about"": ""Generate mock api for get call"",
-                                   ""dateAdd"": ""2021-09-28T21:30:00"",
-                                   ""dateDeadline"": ""2021-10-10T21:10:00""
-                                              ]
-                                                                       ]
-                         }
-                         ";
-                                                     MainTaskJson mainTaskRepository =
-                                                     JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
-                                                     MainTask mainTaskobj = new MainTask();
-                                                     foreach (var i in mainTaskRepository.Task)
-                                                     {
-                                                         mainTaskobj = i;
-                                                     }*/
-
-                            // _repository.Add(mainTaskobj);
                             try
                             {
                                 Console.WriteLine("MainTask -- ");
@@ -135,23 +108,6 @@ namespace ListTask.Controllers
 
                     case Constants.Addtask:
                         {
-                            /*string jsonString =
-                             @"{""tasks"" : [
-                             ""id"" : ""8a92b9c7-c04d-4d81-9bd8-e2c0e798ce1d"",
-   ""name"" : ""Create mock api"",
-   ""about"" : ""Generate mock api call"",
-   ""dateAdd"" : ""2021-09-28T21:30:00"",
-   ""dateDeadline"" : ""2021-10-10T21:10:00""
-]
-}
-";
-                         MainTaskJson mainTaskRepository =
-                         JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
-                         MainTask mainTaskobj = new MainTask();
-                         foreach (var i in mainTaskRepository.Task)
-                         {
-                             mainTaskobj = i;
-                         }*/
                             try
                             {
                                 Console.WriteLine("MainTask -- ");
@@ -199,26 +155,6 @@ namespace ListTask.Controllers
 
                     case Constants.Addsubtask:
                         {
-                            /*string jsonString =
-                                @"{""task"":[
-""children"":[
-""id"": ""dc787b7f-f0d5-4b73-9b75-2099f62c60d0"",
-          ""parent"": ""8a92b9c7-c04d-4d81-9bd8-e2c0e798ce1d"",
-          ""name"": ""Create mock api for get"",
-          ""about"": ""Generate mock api for get call"",
-          ""dateAdd"": ""2021-09-28T21: 30:00"",
-          ""dateDeadline"": ""2021 - 10 - 10T21: 10:00""
-             ]
-                                            ]
-                            }
-";
-                            MainTaskJson mainTaskRepository =
-                            JsonConvert.DeserializeObject<MainTaskJson>(jsonString);
-                            MainTask mainTaskobj = new MainTask();
-                            foreach (var i in mainTaskRepository.Task)
-                            {
-                                mainTaskobj = i;
-                            }*/
                             try
                             {
                                 Console.WriteLine("SubTask -- ");

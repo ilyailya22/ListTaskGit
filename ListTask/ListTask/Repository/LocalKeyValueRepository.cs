@@ -27,7 +27,8 @@ namespace ListTask.Repository
 
         public void Delete(int number)
         {
-            // _keyTaskRepository.Remove(number);
+            Guid id = Guid.NewGuid();
+            _keyTaskRepository.Remove(id);
         }
 
         public void Print()
@@ -52,6 +53,8 @@ namespace ListTask.Repository
 
         public void Edit(int number, MainTask task)
         {
+            Guid id = Guid.NewGuid();
+            _keyTaskRepository[id] = task;
         }
     }
 }

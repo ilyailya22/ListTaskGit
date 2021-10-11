@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ListTask;
 using ListTask.Models;
 using ListTask.Repository;
-using Newtonsoft.Json;
 
 namespace ListTask.Controllers
 {
@@ -15,37 +15,37 @@ namespace ListTask.Controllers
             _repository = repository;
         }
 
-        public void Addmethod(MainTask taskRepository)
+        public void Add(MainTask taskRepository)
         {
             _repository.Add(taskRepository);
         }
 
-        public void Deletemethod(int number)
+        public void Delete(int number)
         {
             _repository.Delete(number);
         }
 
-        public void DeleteAllmethod()
+        public void DeleteAll()
         {
             _repository.DeleteAll();
         }
 
-        public void Printmethod()
+        public void Print()
         {
             _repository.Print();
         }
 
-        public void PrintByldmethod(int number)
+        public void PrintByld(int number)
         {
             _repository.PrintByld(number);
         }
 
-        public void Editmethod(int number, MainTask task)
+        public void Edit(int number, MainTask task)
         {
             _repository.Edit(number, task);
         }
 
-        public void Menumethod()
+        public void Menu()
         {
             string menu;
             do
@@ -54,7 +54,7 @@ namespace ListTask.Controllers
                 menu = Console.ReadLine();
                 switch (menu)
                 {
-                    case "add":
+                    case Constants.Add:
                         {
                             /*                         string jsonString =
                                                         @"{""tasks"" : [
@@ -86,6 +86,7 @@ namespace ListTask.Controllers
                             try
                             {
                                 Console.WriteLine("MainTask -- ");
+                                Console.WriteLine("Enter Number, About task, Date addition and Date end");
                                 MainTask mainTaskobj = new MainTask();
                                 mainTaskobj.Number = int.Parse(Console.ReadLine());
                                 mainTaskobj.Id = Guid.NewGuid();
@@ -93,6 +94,8 @@ namespace ListTask.Controllers
                                 mainTaskobj.DateAdd = DateTime.Parse(Console.ReadLine());
                                 mainTaskobj.DateDead = DateTime.Parse(Console.ReadLine());
                                 List<SubTask> subTasks = new List<SubTask>();
+                                Console.WriteLine("SubTask -- ");
+                                Console.WriteLine("Enter Number, About task, Date addition and Date end");
                                 subTasks.Add(new SubTask
                                 {
                                     Number = int.Parse(Console.ReadLine()),
@@ -108,12 +111,13 @@ namespace ListTask.Controllers
                             catch (Exception)
                             {
                                 Console.WriteLine(typeof(Exception));
+                                Console.WriteLine("Enter correct value");
                             }
 
                             break;
                         }
 
-                    case "add-task":
+                    case Constants.Addtask:
                         {
                             /*string jsonString =
                              @"{""tasks"" : [
@@ -134,7 +138,8 @@ namespace ListTask.Controllers
                          }*/
                             try
                             {
-                                Console.WriteLine("BaseTask -- ");
+                                Console.WriteLine("MainTask -- ");
+                                Console.WriteLine("Enter Number, About task, Date addition and Date end");
                                 MainTask mainTaskobj = new MainTask();
                                 mainTaskobj.Number = int.Parse(Console.ReadLine());
                                 mainTaskobj.Id = Guid.NewGuid();
@@ -146,12 +151,13 @@ namespace ListTask.Controllers
                             catch (Exception)
                             {
                                 Console.WriteLine(typeof(Exception));
+                                Console.WriteLine("Enter correct value");
                             }
 
                             break;
                         }
 
-                    case "add-subtask":
+                    case Constants.Addsubtask:
                         {
                             /*string jsonString =
                                 @"{""task"":[
@@ -176,6 +182,7 @@ namespace ListTask.Controllers
                             try
                             {
                                 Console.WriteLine("SubTask -- ");
+                                Console.WriteLine("Enter Number, About task, Date addition and Date end");
                                 MainTask mainTaskobj = new MainTask();
                                 List<SubTask> subTasks = new List<SubTask>();
                                 subTasks.Add(new SubTask
@@ -193,29 +200,31 @@ namespace ListTask.Controllers
                             catch (Exception)
                             {
                                 Console.WriteLine(typeof(Exception));
+                                Console.WriteLine("Enter correct value");
                             }
 
                             break;
                         }
 
-                    case "print-all":
+                    case Constants.Printall:
                         {
                             _repository.Print();
                             break;
                         }
 
-                    case "print":
+                    case Constants.Print:
                         {
+                            Console.WriteLine("Enter number to print");
                             int number = int.Parse(Console.ReadLine());
                             _repository.PrintByld(number);
                             break;
                         }
 
-                    case "edit":
+                    case Constants.Edit:
                         {
                             try
                             {
-                                Console.WriteLine("number = ");
+                                Console.WriteLine("Enter number to edit");
                                 int number = int.Parse(Console.ReadLine());
                                 MainTask mainTaskobj = new MainTask();
                                 Console.WriteLine("MainTask -- ");
@@ -245,20 +254,21 @@ namespace ListTask.Controllers
                             break;
                         }
 
-                    case "delete":
+                    case Constants.Delete:
                         {
+                            Console.WriteLine("Enter number to delete");
                             int number = int.Parse(Console.ReadLine());
                             _repository.Delete(number);
                             break;
                         }
 
-                    case "drop":
+                    case Constants.Drop:
                         {
                             _repository.DeleteAll();
                             break;
                         }
 
-                    case "exit": return;
+                    case Constants.Exit: return;
 
                     default: break;
                 }

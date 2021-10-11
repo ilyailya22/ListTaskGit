@@ -68,7 +68,7 @@ namespace ListTask.Repository
 
             if (tmp != 1)
             {
-                Console.WriteLine("Такого номера не");
+                Console.WriteLine("Такого номера не має");
             }
         }
 
@@ -79,16 +79,16 @@ namespace ListTask.Repository
 
         public void Edit(int number, MainTask task)
         {
-            int count = 0, index = -1;
+            int count = 0;
             foreach (MainTask s in _taskRepository)
             {
                 if (s.Number == number)
-                    index = count; // I found a match and I want to edit the item at this index
+                    break; // I found a match and I want to edit the item at this index
                 count++;
             }
 
-            _taskRepository.RemoveAt(index);
-            _taskRepository.Insert(index, task);
+            _taskRepository.RemoveAt(count);
+            _taskRepository.Insert(count, task);
         }
     }
 }

@@ -54,7 +54,10 @@ namespace ListTask.Repository
         public void Edit(int number, MainTask task)
         {
             Guid id = Guid.NewGuid();
-            _keyTaskRepository[id] = task;
+            if (!_keyTaskRepository.ContainsKey(id))
+                _keyTaskRepository.Add(id, task);
+            else
+                _keyTaskRepository[id] = task;
         }
     }
 }

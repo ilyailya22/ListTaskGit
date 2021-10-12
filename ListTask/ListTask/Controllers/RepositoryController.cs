@@ -45,6 +45,71 @@ namespace ListTask.Controllers
             _repository.Edit(number, task);
         }
 
+        public void Menu()
+        {
+            string menu;
+            do
+            {
+                Console.WriteLine("add\nadd-task\nadd-subtask\nprint-all\nprint\nedit\ndrop\nexit");
+                menu = Console.ReadLine();
+                switch (menu)
+                {
+                    case Constants.Add:
+                        {
+                            Add();
+                            break;
+                        }
+
+                    case Constants.Addtask:
+                        {
+                            AddTask();
+                            break;
+                        }
+
+                    case Constants.Addsubtask:
+                        {
+                            AddSubtask();
+                            break;
+                        }
+
+                    case Constants.Printall:
+                        {
+                            _repository.Print();
+                            break;
+                        }
+
+                    case Constants.Print:
+                        {
+                            PrintAll();
+                            break;
+                        }
+
+                    case Constants.Edit:
+                        {
+                            Edit();
+                            break;
+                        }
+
+                    case Constants.Delete:
+                        {
+                            Delete();
+                            break;
+                        }
+
+                    case Constants.Drop:
+                        {
+                            _repository.DeleteAll();
+                            break;
+                        }
+
+                    case Constants.Exit: return;
+
+                    default: break;
+                }
+            }
+            while (true);
+        }
+
         private void Add()
         {
             try
@@ -125,7 +190,7 @@ namespace ListTask.Controllers
             }
         }
 
-        private void Printt()
+        private void PrintAll()
         {
             Console.WriteLine("Enter number to print");
             int number;
@@ -155,7 +220,7 @@ namespace ListTask.Controllers
             }
         }
 
-        private void Addtask()
+        private void AddTask()
         {
             try
             {
@@ -200,7 +265,7 @@ namespace ListTask.Controllers
             }
         }
 
-        private void Addsubtask()
+        private void AddSubtask()
         {
             try
                 {
@@ -319,70 +384,5 @@ namespace ListTask.Controllers
                 Console.WriteLine(typeof(Exception));
             }
         }
-
-        public void Menu()
-        {
-            string menu;
-            do
-            {
-                Console.WriteLine("add\nadd-task\nadd-subtask\nprint-all\nprint\nedit\ndrop\nexit");
-                menu = Console.ReadLine();
-                switch (menu)
-                {
-                    case Constants.Add:
-                        {
-                            Add();
-                            break;
-                        }
-
-                    case Constants.Addtask:
-                        {
-                            Addtask();
-                            break;
-                        }
-
-                    case Constants.Addsubtask:
-                        {
-                            Addsubtask();
-                            break;
-                        }
-
-                    case Constants.Printall:
-                        {
-                            _repository.Print();
-                            break;
-                        }
-
-                    case Constants.Print:
-                        {
-                            Printt();
-                            break;
-                        }
-
-                    case Constants.Edit:
-                        {
-                            Edit();
-                            break;
-                        }
-
-                    case Constants.Delete:
-                        {
-                            Delete();
-                            break;
-                        }
-
-                    case Constants.Drop:
-                        {
-                            _repository.DeleteAll();
-                            break;
-                        }
-
-                    case Constants.Exit: return;
-
-                    default: break;
-                }
-            }
-            while (true);
-    }
     }
 }

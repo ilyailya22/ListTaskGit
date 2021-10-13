@@ -7,10 +7,14 @@ namespace ListTask.Repository
     {
         void Add(MainTask taskRepository);
 
-        void Delete(Guid taskRepository);
+        void Delete(int number);
 
         void DeleteAll();
 
         void Print();
+
+        void PrintByld(int number);
+
+        void Edit(int number, MainTask task);
     }
 }

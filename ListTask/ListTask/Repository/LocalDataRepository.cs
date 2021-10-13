@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ListTask.Models;
+using Newtonsoft.Json;
 
 namespace ListTask.Repository
 {
@@ -23,12 +24,12 @@ namespace ListTask.Repository
             _taskRepository.Add(taskRepository);
         }
 
-        public void Delete(Guid taskRepository)
+        public void Delete(int number)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)
             {
-                if (i.Id == taskRepository)
+                if (i.Number == number)
                 {
                     tmp = 1;
                     _taskRepository.Remove(i);
@@ -47,13 +48,47 @@ namespace ListTask.Repository
         {
             foreach (var i in _taskRepository)
             {
-                i.Show();
+                i.ShowNameDate();
+            }
+        }
+
+        public void PrintByld(int number)
+        {
+            int tmp = 0;
+            foreach (var i in _taskRepository)
+            {
+                if (i.Number == number)
+                {
+                    tmp = 1;
+                    i.ShowNameDate();
+                    Console.WriteLine("Вывод успешно выполнен");
+                    break;
+                }
+            }
+
+            if (tmp != 1)
+            {
+                Console.WriteLine("Такого номера не має");
             }
         }
 
         public void DeleteAll()
         {
             _taskRepository.Clear();
+        }
+
+        public void Edit(int number, MainTask task)
+        {
+            int count = 0;
+            foreach (MainTask s in _taskRepository)
+            {
+                if (s.Number == number)
+                    break;
+                count++;
+            }
+
+            _taskRepository.RemoveAt(count);
+            _taskRepository.Insert(count, task);
         }
     }
 }

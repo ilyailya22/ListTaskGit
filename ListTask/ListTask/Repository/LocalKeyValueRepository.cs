@@ -7,27 +7,26 @@ namespace ListTask.Repository
 {
     public class LocalKeyValueRepository : IRepository
     {
-        private Dictionary<Guid, MainTask> _keyTaskRepository;
+        private Dictionary<int, MainTask> _keyTaskRepository;
 
         public LocalKeyValueRepository()
         {
-            _keyTaskRepository = new Dictionary<Guid, MainTask>();
+            _keyTaskRepository = new Dictionary<int, MainTask>();
         }
 
         public LocalKeyValueRepository(int size)
         {
-            _keyTaskRepository = new Dictionary<Guid, MainTask>(size);
+            _keyTaskRepository = new Dictionary<int, MainTask>(size);
         }
 
         public void Add(MainTask taskRepository)
         {
-            Guid id = Guid.NewGuid();
+            int id = 0;
             _keyTaskRepository.Add(id, taskRepository);
         }
 
-        public void Delete(int number)
+        public void Delete(int id)
         {
-            Guid id = Guid.NewGuid();
             _keyTaskRepository.Remove(id);
         }
 
@@ -35,14 +34,14 @@ namespace ListTask.Repository
         {
             for (int i = 0; i < _keyTaskRepository.Count; i++)
             {
-                KeyValuePair<Guid, MainTask> entry = _keyTaskRepository.ElementAt(i);
+                KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(i);
                 Console.WriteLine(entry.Key + " : " + entry.Value);
             }
         }
 
-        public void PrintByld(int number)
+        public void PrintByld(int id)
         {
-            KeyValuePair<Guid, MainTask> entry = _keyTaskRepository.ElementAt(number);
+            KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(id);
             Console.WriteLine(entry.Key + " : " + entry.Value);
         }
 
@@ -53,11 +52,10 @@ namespace ListTask.Repository
 
         public void Edit(int number, MainTask task)
         {
-            Guid id = Guid.NewGuid();
-            if (!_keyTaskRepository.ContainsKey(id))
-                _keyTaskRepository.Add(id, task);
+            if (!_keyTaskRepository.ContainsKey(number))
+                _keyTaskRepository.Add(number, task);
             else
-                _keyTaskRepository[id] = task;
+                _keyTaskRepository[number] = task;
         }
     }
 }

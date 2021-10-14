@@ -1,7 +1,6 @@
 ﻿using System;
 using ListTask;
 using ListTask.Controllers;
-using ListTask.Models;
 using ListTask.Repository;
 using Ninject;
 

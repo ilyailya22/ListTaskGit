@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -7,10 +6,8 @@ namespace ListTask.Models
 {
     public class BaseTask
     {
-        public int Number { get; set; }
-
         [JsonProperty("id")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

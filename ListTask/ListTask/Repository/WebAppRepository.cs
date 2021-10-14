@@ -27,11 +27,11 @@ namespace ListTask.Repository
             }
         }
 
-        public async void Delete(int number)
+        public async void Delete(int id)
         {
             try
             {
-                string jsonString = JsonConvert.SerializeObject(_requestService);
+                string jsonString = JsonConvert.SerializeObject(id);
                 await _requestService.DeleteAsync("https://tasklist.free.beeceptor.com/deleteTask", jsonString);
             }
             catch (Exception)
@@ -70,7 +70,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int number)
+        public void PrintByld(int id)
         {
         }
 
@@ -78,7 +78,7 @@ namespace ListTask.Repository
         {
         }
 
-        public void Edit(int number, MainTask task)
+        public void Edit(int id, MainTask task)
         {
         }
     }

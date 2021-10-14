@@ -1,5 +1,4 @@
-﻿using System;
-using ListTask.Models;
+﻿using ListTask.Models;
 
 namespace ListTask.Repository
 {
@@ -7,14 +6,14 @@ namespace ListTask.Repository
     {
         void Add(MainTask taskRepository);
 
-        void Delete(int number);
+        void Delete(int id);
 
         void DeleteAll();
 
         void Print();
 
-        void PrintByld(int number);
+        void PrintByld(int id);
 
-        void Edit(int number, MainTask task);
+        void Edit(int id, MainTask task);
     }
 }

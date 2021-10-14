@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ListTask;
 using ListTask.Models;
 using ListTask.Repository;
 
@@ -54,12 +53,6 @@ namespace ListTask.Controllers
                 menu = Console.ReadLine();
                 switch (menu)
                 {
-                    case Constants.Add:
-                        {
-                            Add();
-                            break;
-                        }
-
                     case Constants.Addtask:
                         {
                             AddTask();
@@ -110,86 +103,6 @@ namespace ListTask.Controllers
             while (true);
         }
 
-        private void Add()
-        {
-            try
-            {
-                Console.WriteLine("MainTask -- ");
-                Console.WriteLine("Enter Number, About task, Date addition and Date end");
-                MainTask mainTaskobj = new MainTask();
-                if (int.TryParse(Console.ReadLine(), out var number1))
-                {
-                    mainTaskobj.Number = number1;
-                }
-
-                mainTaskobj.Id = Guid.NewGuid();
-                mainTaskobj.About = Console.ReadLine();
-                if (DateTime.TryParse(Console.ReadLine(), out var datetime1))
-                {
-                    mainTaskobj.DateAdd = datetime1;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datedead1))
-                {
-                    mainTaskobj.DateDead = datedead1;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                List<SubTask> subTasks = new List<SubTask>();
-                Console.WriteLine("SubTask -- ");
-                Console.WriteLine("Enter Number, About task, Date addition and Date end");
-                int subnumber = 0;
-                DateTime subdateadd = new DateTime(00, 00, 0000);
-                DateTime subdatedead = new DateTime(00, 00, 0000);
-                if (int.TryParse(Console.ReadLine(), out var number2))
-                {
-                    subnumber = number2;
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datetime2))
-                {
-                    subdateadd = datetime2;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datedead2))
-                {
-                    subdatedead = datedead2;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                subTasks.Add(new SubTask
-                {
-                    Number = subnumber,
-                    Id = Guid.NewGuid(),
-                    Parent = Guid.NewGuid(),
-                    About = Console.ReadLine(),
-                    DateAdd = subdateadd,
-                    DateDead = subdatedead
-                });
-                mainTaskobj.Children = subTasks;
-                _repository.Add(mainTaskobj);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(typeof(Exception));
-                Console.WriteLine("Enter correct value");
-            }
-        }
-
         private void PrintAll()
         {
             Console.WriteLine("Enter number to print");
@@ -229,14 +142,13 @@ namespace ListTask.Controllers
                 MainTask mainTaskobj = new MainTask();
                 if (int.TryParse(Console.ReadLine(), out var number))
                 {
-                    mainTaskobj.Number = number;
+                    mainTaskobj.Id = number;
                 }
                 else
                 {
                     Console.WriteLine("Enter correct value");
                 }
 
-                mainTaskobj.Id = Guid.NewGuid();
                 mainTaskobj.About = Console.ReadLine();
                 if (DateTime.TryParse(Console.ReadLine(), out var datetime))
                 {
@@ -273,12 +185,18 @@ namespace ListTask.Controllers
                 Console.WriteLine("Enter Number, About task, Date addition and Date end");
                 MainTask mainTaskobj = new MainTask();
                 List<SubTask> subTasks = new List<SubTask>();
-                int subnumber = 0;
+                int subparent = 0;
+                int subid = 0;
                 DateTime subdateadd = new DateTime(00, 00, 0000);
                 DateTime subdatedead = new DateTime(00, 00, 0000);
-                if (int.TryParse(Console.ReadLine(), out var number2))
+                if (int.TryParse(Console.ReadLine(), out var id))
                 {
-                    subnumber = number2;
+                    subid = id;
+                }
+
+                if (int.TryParse(Console.ReadLine(), out var parent))
+                {
+                    subparent = parent;
                 }
 
                 if (DateTime.TryParse(Console.ReadLine(), out var datetime2))
@@ -301,9 +219,8 @@ namespace ListTask.Controllers
 
                 subTasks.Add(new SubTask
                 {
-                    Number = subnumber,
-                    Id = Guid.NewGuid(),
-                    Parent = Guid.NewGuid(),
+                    Id = subid,
+                    Parent = parent,
                     About = Console.ReadLine(),
                     DateAdd = subdateadd,
                     DateDead = subdatedead
@@ -335,18 +252,43 @@ namespace ListTask.Controllers
 
                 MainTask mainTaskobj = new MainTask();
                 Console.WriteLine("MainTask -- ");
-                mainTaskobj.Number = int.Parse(Console.ReadLine());
-                mainTaskobj.Id = Guid.NewGuid();
+                if (int.TryParse(Console.ReadLine(), out var number1))
+                {
+                    mainTaskobj.Id = number1;
+                }
+
                 mainTaskobj.About = Console.ReadLine();
-                mainTaskobj.DateAdd = DateTime.Parse(Console.ReadLine());
-                mainTaskobj.DateDead = DateTime.Parse(Console.ReadLine());
+                if (DateTime.TryParse(Console.ReadLine(), out var datetime1))
+                {
+                    mainTaskobj.DateAdd = datetime1;
+                }
+                else
+                {
+                    Console.WriteLine("Enter correct value");
+                }
+
+                if (DateTime.TryParse(Console.ReadLine(), out var datedead1))
+                {
+                    mainTaskobj.DateDead = datedead1;
+                }
+                else
+                {
+                    Console.WriteLine("Enter correct value");
+                }
+
                 List<SubTask> subTasks = new List<SubTask>();
-                int subnumber = 0;
+                int subid = 0;
+                int subparent = 0;
                 DateTime subdateadd = new DateTime(00, 00, 0000);
                 DateTime subdatedead = new DateTime(00, 00, 0000);
-                if (int.TryParse(Console.ReadLine(), out var number2))
+                if (int.TryParse(Console.ReadLine(), out var id))
                 {
-                    subnumber = number2;
+                    subid = id;
+                }
+
+                if (int.TryParse(Console.ReadLine(), out var parent))
+                {
+                    subparent = parent;
                 }
 
                 if (DateTime.TryParse(Console.ReadLine(), out var datetime2))
@@ -369,9 +311,8 @@ namespace ListTask.Controllers
 
                 subTasks.Add(new SubTask
                 {
-                    Number = subnumber,
-                    Id = Guid.NewGuid(),
-                    Parent = Guid.NewGuid(),
+                    Id = subid,
+                    Parent = subparent,
                     About = Console.ReadLine(),
                     DateAdd = subdateadd,
                     DateDead = subdatedead

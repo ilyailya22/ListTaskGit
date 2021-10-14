@@ -2,8 +2,6 @@
 {
     public static class Constants
     {
-        public const string Add = "add";
-
         public const string Addtask = "add-task";
 
         public const string Addsubtask = "add-subtask";

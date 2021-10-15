@@ -1,4 +1,5 @@
-﻿using ListTask.Models;
+﻿using System;
+using ListTask.Models;
 using ListTask.Services;
 
 namespace ListTask.Repository
@@ -14,17 +15,13 @@ namespace ListTask.Repository
 
         public void Add(BaseTask task)
         {
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
+            if (task is MainTask mainTask)
             {
-                mainTask = (MainTask)task;
                 _dataBaseService.AddTask(mainTask);
             }
 
-            SubTask subTask = new SubTask();
-            if (task is MainTask)
+            if (task is SubTask subTask)
             {
-                subTask = (SubTask)task;
                 _dataBaseService.AddSubtask(subTask);
             }
         }
@@ -48,17 +45,13 @@ namespace ListTask.Repository
 
         public void Edit(int id, BaseTask task)
         {
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
+            if (task is MainTask mainTask)
             {
-                mainTask = (MainTask)task;
                 _dataBaseService.EditTask(id, mainTask);
             }
 
-            SubTask subTask = new SubTask();
-            if (task is MainTask)
+            if (task is SubTask subTask)
             {
-                subTask = (SubTask)task;
                 _dataBaseService.EditSubtask(id, subTask);
             }
         }

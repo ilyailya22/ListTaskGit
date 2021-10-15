@@ -22,13 +22,10 @@ namespace ListTask.Repository
         public void Add(BaseTask task)
         {
             int id = 0;
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
+            if (task is MainTask mainTask)
             {
-                mainTask = (MainTask)task;
+                _keyTaskRepository.Add(id, mainTask);
             }
-
-            _keyTaskRepository.Add(id, mainTask);
         }
 
         public void Delete(int id, string task)
@@ -58,16 +55,13 @@ namespace ListTask.Repository
 
         public void Edit(int id, BaseTask task)
         {
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
+            if (task is MainTask mainTask)
             {
-                mainTask = (MainTask)task;
+                if (!_keyTaskRepository.ContainsKey(id))
+                    _keyTaskRepository.Add(id, mainTask);
+                else
+                    _keyTaskRepository[id] = mainTask;
             }
-
-            if (!_keyTaskRepository.ContainsKey(id))
-                _keyTaskRepository.Add(id, mainTask);
-            else
-                _keyTaskRepository[id] = mainTask;
         }
     }
 }

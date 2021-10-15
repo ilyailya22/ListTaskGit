@@ -16,7 +16,7 @@ namespace ListTask
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL($"server=localhost;database=tasks;user=login;password=password");
+            optionsBuilder.UseMySQL($"server=localhost;port=3307;database=tasks;user=user;password=password");
         }
     }
 }

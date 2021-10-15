@@ -16,16 +16,13 @@ namespace ListTask.Repository
 
         public async void Add(BaseTask task)
         {
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
-            {
-                mainTask = (MainTask)task;
-            }
-
             try
             {
-                string jsonString = JsonConvert.SerializeObject(mainTask);
-                await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
+                if (task is MainTask mainTask)
+                {
+                    string jsonString = JsonConvert.SerializeObject(mainTask);
+                    await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
+                }
             }
             catch (Exception)
             {

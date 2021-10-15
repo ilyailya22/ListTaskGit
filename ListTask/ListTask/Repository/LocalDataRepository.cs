@@ -20,10 +20,8 @@ namespace ListTask.Repository
 
         public void Add(BaseTask task)
         {
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
+            if (task is MainTask mainTask)
             {
-                mainTask = (MainTask)task;
                 _taskRepository.Add(mainTask);
             }
         }
@@ -83,12 +81,6 @@ namespace ListTask.Repository
 
         public void Edit(int id, BaseTask task)
         {
-            MainTask mainTask = new MainTask();
-            if (task is MainTask)
-            {
-                mainTask = (MainTask)task;
-            }
-
             int count = 0;
             foreach (MainTask s in _taskRepository)
             {
@@ -98,7 +90,10 @@ namespace ListTask.Repository
             }
 
             _taskRepository.RemoveAt(count);
-            _taskRepository.Insert(count, mainTask);
+            if (task is MainTask mainTask)
+            {
+                _taskRepository.Insert(count, mainTask);
+            }
         }
     }
 }

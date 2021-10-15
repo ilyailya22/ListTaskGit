@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ListTask.Models;
 
@@ -26,8 +27,10 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var mainTasks = db.MainTasks.FirstOrDefault(x => x.Id == id);
-                return mainTasks;
+                var mainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
+                var subTask = db.SubTasks.Where(x => x.Parent == id).ToList();
+                mainTask.Children = subTask;
+                return mainTask;
             }
         }
 
@@ -35,8 +38,8 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var subTasks = db.SubTasks.FirstOrDefault(x => x.Id == id);
-                return subTasks;
+                var subTask = db.SubTasks.FirstOrDefault(x => x.Id == id);
+                return subTask;
             }
         }
 
@@ -44,9 +47,7 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                MainTask dbMainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
-                dbMainTask = mainTask;
-                db.MainTasks.Update(dbMainTask);
+                db.MainTasks.Update(mainTask);
                 db.SaveChanges();
             }
         }
@@ -55,9 +56,7 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                SubTask dbSubTask = db.SubTasks.FirstOrDefault(x => x.Id == id);
-                dbSubTask = subTask;
-                db.SubTasks.Update(dbSubTask);
+                db.SubTasks.Update(subTask);
                 db.SaveChanges();
             }
         }
@@ -66,7 +65,9 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                MainTask mainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
+                var mainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
+                var subTask = db.SubTasks.Where(x => x.Parent == id).ToList();
+                mainTask.Children = subTask;
                 db.MainTasks.Remove(mainTask);
                 db.SaveChanges();
             }
@@ -76,7 +77,7 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                SubTask subTask = db.SubTasks.FirstOrDefault(x => x.Id == id);
+                var subTask = db.SubTasks.FirstOrDefault(x => x.Id == id);
                 db.SubTasks.Remove(subTask);
                 db.SaveChanges();
             }

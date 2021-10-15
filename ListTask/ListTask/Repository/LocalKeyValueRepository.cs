@@ -19,15 +19,21 @@ namespace ListTask.Repository
             _keyTaskRepository = new Dictionary<int, MainTask>(size);
         }
 
-        public void Add(MainTask taskRepository)
+        public void Add(BaseTask task)
         {
             int id = 0;
-            _keyTaskRepository.Add(id, taskRepository);
+            MainTask mainTask = new MainTask();
+            if (task is MainTask)
+            {
+                mainTask = (MainTask)task;
+            }
+
+            _keyTaskRepository.Add(id, mainTask);
         }
 
-        public void Delete(int id)
+        public void Delete(int id, string task)
         {
-            _keyTaskRepository.Remove(id);
+                _keyTaskRepository.Remove(id);
         }
 
         public void Print()
@@ -39,7 +45,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id)
+        public void PrintByld(int id, string task)
         {
             KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(id);
             Console.WriteLine(entry.Key + " : " + entry.Value);
@@ -50,12 +56,18 @@ namespace ListTask.Repository
             _keyTaskRepository.Clear();
         }
 
-        public void Edit(int number, MainTask task)
+        public void Edit(int id, BaseTask task)
         {
-            if (!_keyTaskRepository.ContainsKey(number))
-                _keyTaskRepository.Add(number, task);
+            MainTask mainTask = new MainTask();
+            if (task is MainTask)
+            {
+                mainTask = (MainTask)task;
+            }
+
+            if (!_keyTaskRepository.ContainsKey(id))
+                _keyTaskRepository.Add(id, mainTask);
             else
-                _keyTaskRepository[number] = task;
+                _keyTaskRepository[id] = mainTask;
         }
     }
 }

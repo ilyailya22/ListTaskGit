@@ -18,12 +18,17 @@ namespace ListTask.Repository
             _taskRepository = new List<MainTask>(size);
         }
 
-        public void Add(MainTask taskRepository)
+        public void Add(BaseTask task)
         {
-            _taskRepository.Add(taskRepository);
+            MainTask mainTask = new MainTask();
+            if (task is MainTask)
+            {
+                mainTask = (MainTask)task;
+                _taskRepository.Add(mainTask);
+            }
         }
 
-        public void Delete(int id)
+        public void Delete(int id, string task)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)
@@ -51,7 +56,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id)
+        public void PrintByld(int id, string task)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)
@@ -76,8 +81,14 @@ namespace ListTask.Repository
             _taskRepository.Clear();
         }
 
-        public void Edit(int id, MainTask task)
+        public void Edit(int id, BaseTask task)
         {
+            MainTask mainTask = new MainTask();
+            if (task is MainTask)
+            {
+                mainTask = (MainTask)task;
+            }
+
             int count = 0;
             foreach (MainTask s in _taskRepository)
             {
@@ -87,7 +98,7 @@ namespace ListTask.Repository
             }
 
             _taskRepository.RemoveAt(count);
-            _taskRepository.Insert(count, task);
+            _taskRepository.Insert(count, mainTask);
         }
     }
 }

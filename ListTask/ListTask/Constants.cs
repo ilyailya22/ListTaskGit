@@ -17,5 +17,9 @@
         public const string Drop = "drop";
 
         public const string Exit = "exit";
+
+        public const string MainTask = "maintask";
+
+        public const string SubTask = "subtask";
     }
 }

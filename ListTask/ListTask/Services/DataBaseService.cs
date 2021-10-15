@@ -6,101 +6,79 @@ namespace ListTask.Services
 {
     public class DataBaseService : IDataBaseService
     {
-        public void AddTask(MainTask mainTaskobj)
+        public void AddTask(MainTask mainTask)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.MainTasks.Add(mainTaskobj);
+                db.MainTasks.Add(mainTask);
             }
         }
 
-        public void AddSubtask(SubTask subTaskobj)
+        public void AddSubtask(SubTask subTask)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.SubTasks.Add(subTaskobj);
+                db.SubTasks.Add(subTask);
             }
         }
 
-        public void ReadTask()
+        public MainTask ReadTask(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var mainTasks = db.MainTasks.ToList();
-                Console.WriteLine("Список объектов:");
-                foreach (MainTask mainTask in mainTasks)
-                {
-                    Console.WriteLine($"{mainTask.Id}.{mainTask.Name} - {mainTask.About}");
-                }
+                var mainTasks = db.MainTasks.FirstOrDefault(x => x.Id == id);
+                return mainTasks;
             }
         }
 
-        public void ReadSubtask()
+        public SubTask ReadSubtask(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var subTasks = db.SubTasks.ToList();
-                Console.WriteLine("Список объектов:");
-                foreach (SubTask subTask in subTasks)
-                {
-                    Console.WriteLine($"{subTask.Id}.{subTask.Name} - {subTask.About}");
-                }
+                var subTasks = db.SubTasks.FirstOrDefault(x => x.Id == id);
+                return subTasks;
             }
         }
 
-        public void EditTask()
+        public void EditTask(int id, MainTask mainTask)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                MainTask mainTask = db.MainTasks.FirstOrDefault();
-                if (mainTask != null)
-                {
-                    mainTask.Name = "Bob";
-                    mainTask.About = "some about";
-                    db.MainTasks.Update(mainTask);
-                    db.SaveChanges();
-                }
+                MainTask dbMainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
+                dbMainTask = mainTask;
+                db.MainTasks.Update(dbMainTask);
+                db.SaveChanges();
             }
         }
 
-        public void EditSubtask()
+        public void EditSubtask(int id, SubTask subTask)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                SubTask subTask = db.SubTasks.FirstOrDefault();
-                if (subTask != null)
-                {
-                    subTask.Name = "Bob";
-                    subTask.About = "some about";
-                    db.SubTasks.Update(subTask);
-                    db.SaveChanges();
-                }
+                SubTask dbSubTask = db.SubTasks.FirstOrDefault(x => x.Id == id);
+                dbSubTask = subTask;
+                db.SubTasks.Update(dbSubTask);
+                db.SaveChanges();
             }
         }
 
-        public void DeleteTask()
+        public void DeleteTask(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                MainTask mainTask = db.MainTasks.FirstOrDefault();
-                if (mainTask != null)
-                {
-                    db.MainTasks.Remove(mainTask);
-                    db.SaveChanges();
-                }
+                MainTask mainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
+                db.MainTasks.Remove(mainTask);
+                db.SaveChanges();
             }
         }
 
-        public void DeleteSubtask()
+        public void DeleteSubtask(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                SubTask subTask = db.SubTasks.FirstOrDefault();
-                if (subTask != null)
-                {
-                    db.SubTasks.Remove(subTask);
-                    db.SaveChanges();
-                }
+                SubTask subTask = db.SubTasks.FirstOrDefault(x => x.Id == id);
+                db.SubTasks.Remove(subTask);
+                db.SaveChanges();
             }
         }
     }

@@ -4,20 +4,20 @@ namespace ListTask.Services
 {
     public interface IDataBaseService
     {
-        public void AddTask(MainTask maintaskobj);
+        public void AddTask(MainTask mainTask);
 
-        public void AddSubtask();
+        public void AddSubtask(SubTask subTask);
 
-        public void ReadTask();
+        public MainTask ReadTask(int id);
 
-        public void ReadSubtask();
+        public SubTask ReadSubtask(int id);
 
-        public void EditTask();
+        public void EditTask(int id, MainTask mainTask);
 
-        public void EditSubtask();
+        public void EditSubtask(int id, SubTask subTask);
 
-        public void DeleteTask();
+        public void DeleteTask(int id);
 
-        public void DeleteSubtask();
+        public void DeleteSubtask(int id);
     }
 }

@@ -14,11 +14,17 @@ namespace ListTask.Repository
             _requestService = service;
         }
 
-        public async void Add(MainTask taskRepository)
+        public async void Add(BaseTask task)
         {
+            MainTask mainTask = new MainTask();
+            if (task is MainTask)
+            {
+                mainTask = (MainTask)task;
+            }
+
             try
             {
-                string jsonString = JsonConvert.SerializeObject(taskRepository);
+                string jsonString = JsonConvert.SerializeObject(mainTask);
                 await _requestService.PostAsync("https://tasklist.free.beeceptor.com/addNewTask", jsonString);
             }
             catch (Exception)
@@ -27,7 +33,7 @@ namespace ListTask.Repository
             }
         }
 
-        public async void Delete(int id)
+        public async void Delete(int id, string task)
         {
             try
             {
@@ -70,7 +76,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id)
+        public void PrintByld(int id, string task)
         {
         }
 
@@ -78,7 +84,7 @@ namespace ListTask.Repository
         {
         }
 
-        public void Edit(int id, MainTask task)
+        public void Edit(int id, BaseTask task)
         {
         }
     }

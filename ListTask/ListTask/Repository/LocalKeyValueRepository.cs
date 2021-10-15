@@ -28,7 +28,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void Delete(int id, string task)
+        public void Delete(int id, int task)
         {
                 _keyTaskRepository.Remove(id);
         }
@@ -42,7 +42,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id, string task)
+        public void PrintByld(int id, int task)
         {
             KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(id);
             Console.WriteLine(entry.Key + " : " + entry.Value);

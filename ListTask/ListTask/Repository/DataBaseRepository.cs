@@ -26,14 +26,14 @@ namespace ListTask.Repository
             }
         }
 
-        public void Delete(int id, string task)
+        public void Delete(int id, int task)
         {
-            if (task == "maintask")
+            if (task == (int)Constants.MainTask)
             {
                 _dataBaseService.DeleteTask(id);
             }
 
-            if (task == "subtask")
+            if (task == (int)Constants.SubTask)
             {
                 _dataBaseService.DeleteSubtask(id);
             }
@@ -56,18 +56,14 @@ namespace ListTask.Repository
             }
         }
 
-        public void Print()
+        public void PrintByld(int id, int task)
         {
-        }
-
-        public void PrintByld(int id, string task)
-        {
-            if (task == "maintask")
+            if (task == (int)Constants.MainTask)
             {
                 _dataBaseService.ReadTask(id);
             }
 
-            if (task == "subtask")
+            if (task == (int)Constants.SubTask)
             {
                 _dataBaseService.ReadSubtask(id);
             }

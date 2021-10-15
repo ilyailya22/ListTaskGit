@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using ListTask.Models;
 
 namespace ListTask.Services
@@ -28,8 +26,8 @@ namespace ListTask.Services
             using (ApplicationContext db = new ApplicationContext())
             {
                 var mainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
-                var subTask = db.SubTasks.Where(x => x.Parent == id).ToList();
-                mainTask.Children = subTask;
+                var subTasks = db.SubTasks.Where(x => x.Parent == id).ToList();
+                mainTask.Children = subTasks;
                 return mainTask;
             }
         }
@@ -66,8 +64,8 @@ namespace ListTask.Services
             using (ApplicationContext db = new ApplicationContext())
             {
                 var mainTask = db.MainTasks.FirstOrDefault(x => x.Id == id);
-                var subTask = db.SubTasks.Where(x => x.Parent == id).ToList();
-                mainTask.Children = subTask;
+                var subTasks = db.SubTasks.Where(x => x.Parent == id).ToList();
+                mainTask.Children = subTasks;
                 db.MainTasks.Remove(mainTask);
                 db.SaveChanges();
             }

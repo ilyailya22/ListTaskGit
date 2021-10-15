@@ -28,7 +28,7 @@ namespace ListTask.Controllers
             }
         }
 
-        public void Delete(int id, string task)
+        public void Delete(int id, int task)
         {
             _repository.Delete(id, task);
         }
@@ -38,12 +38,7 @@ namespace ListTask.Controllers
             _repository.DeleteAll();
         }
 
-        public void Print()
-        {
-            _repository.Print();
-        }
-
-        public void PrintByld(int number, string task)
+        public void PrintByld(int number, int task)
         {
             _repository.PrintByld(number, task);
         }
@@ -63,59 +58,60 @@ namespace ListTask.Controllers
 
         public void Menu()
         {
-            string menu;
+            int menu = 0;
             do
             {
                 Console.WriteLine("Enter what need to do");
-                Console.WriteLine("add\n" +
-                    "for add maintask - add-task\nFor add subtask - add-subtask\nprint-all\nFor print any task - print\nFor edit task - edit\ndrop\nexit");
-                menu = Console.ReadLine();
+                Console.WriteLine("for add maintask - 0\nFor add subtask -1\nFor print any task - 2\nFor edit task - 3\nFor delete task - 4\ndrop\nexit - 6");
+                if (int.TryParse(Console.ReadLine(), out var intmenu))
+                {
+                    menu = intmenu;
+                }
+                else
+                {
+                    Console.WriteLine("Enter correct value");
+                }
+
                 Console.Clear();
                 switch (menu)
                 {
-                    case Constants.Addtask:
+                    case (int)Constants.Addtask:
                         {
                             AddTask();
                             break;
                         }
 
-                    case Constants.Addsubtask:
+                    case (int)Constants.Addsubtask:
                         {
                             AddSubtask();
                             break;
                         }
 
-                    case Constants.Printall:
-                        {
-                            _repository.Print();
-                            break;
-                        }
-
-                    case Constants.Print:
+                    case (int)Constants.Print:
                         {
                             PrintByld();
                             break;
                         }
 
-                    case Constants.Edit:
+                    case (int)Constants.Edit:
                         {
                             Edit();
                             break;
                         }
 
-                    case Constants.Delete:
+                    case (int)Constants.Delete:
                         {
                             Delete();
                             break;
                         }
 
-                    case Constants.Drop:
+                    case (int)Constants.Drop:
                         {
                             _repository.DeleteAll();
                             break;
                         }
 
-                    case Constants.Exit: return;
+                    case (int)Constants.Exit: return;
 
                     default: break;
                 }
@@ -125,9 +121,18 @@ namespace ListTask.Controllers
 
         private void PrintByld()
         {
-            Console.WriteLine("Enter type task and number to print");
+            Console.WriteLine("Enter type task 7 - mainTask, 8 - subTask and number to print");
             int number;
-            string task = Console.ReadLine();
+            int task = 0;
+            if (int.TryParse(Console.ReadLine(), out var inttask))
+            {
+                task = inttask;
+            }
+            else
+            {
+                Console.WriteLine("Enter correct value");
+            }
+
             if (int.TryParse(Console.ReadLine(), out var parsenumber))
             {
                 number = parsenumber;
@@ -141,9 +146,18 @@ namespace ListTask.Controllers
 
         private void Delete()
         {
-            Console.WriteLine("Enter type task and number to delete");
+            Console.WriteLine("Enter type task 7 - mainTask, 8 - subTask and number to delete");
             int number;
-            string task = Console.ReadLine();
+            int task = 0;
+            if (int.TryParse(Console.ReadLine(), out var inttask))
+            {
+                task = inttask;
+            }
+            else
+            {
+                Console.WriteLine("Enter correct value");
+            }
+
             if (int.TryParse(Console.ReadLine(), out var parsenumber))
             {
                 number = parsenumber;

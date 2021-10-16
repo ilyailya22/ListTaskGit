@@ -61,7 +61,7 @@ namespace ListTask.Controllers
             do
             {
                 Console.WriteLine("Enter what need to do");
-                Console.WriteLine("for add maintask - 0\nFor add subtask -1\nFor print any task - 2\nFor edit task - 3\nFor delete task - 4\ndrop\nexit - 6");
+                Console.WriteLine("for add maintask - add-task\nFor add subtask - add-subtask\nFor print any task - print\nFor edit task - edit\nFor delete task - delete\ndrop\nexit - exit");
                 string menu = Console.ReadLine();
                 Console.Clear();
                 switch (menu)

@@ -70,14 +70,14 @@ namespace ListTask.Repository
             _keyTaskRepository.Clear();
         }
 
-        public void Edit(int id, BaseTask task)
+        public void Edit(BaseTask task)
         {
             if (task is MainTask mainTask)
             {
-                if (!_keyTaskRepository.ContainsKey(id))
-                    _keyTaskRepository.Add(id, mainTask);
+                if (!_keyTaskRepository.ContainsKey(mainTask.Id))
+                    _keyTaskRepository.Add(mainTask.Id, mainTask);
                 else
-                    _keyTaskRepository[id] = mainTask;
+                    _keyTaskRepository[mainTask.Id] = mainTask;
             }
 
             if (task is SubTask subTask)
@@ -94,10 +94,10 @@ namespace ListTask.Repository
                     DateDead = subTask.DateDead
                 });
                 mainTaskConverted.Children = subTasks;
-                if (!_keyTaskRepository.ContainsKey(id))
-                    _keyTaskRepository.Add(id, mainTaskConverted);
+                if (!_keyTaskRepository.ContainsKey(subTask.Id))
+                    _keyTaskRepository.Add(subTask.Id, mainTaskConverted);
                 else
-                    _keyTaskRepository[id] = mainTaskConverted;
+                    _keyTaskRepository[subTask.Id] = mainTaskConverted;
             }
             }
     }

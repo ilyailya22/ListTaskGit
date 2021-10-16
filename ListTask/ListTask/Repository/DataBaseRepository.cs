@@ -43,16 +43,16 @@ namespace ListTask.Repository
         {
         }
 
-        public void Edit(int id, BaseTask task)
+        public void Edit(BaseTask task)
         {
             if (task is MainTask mainTask)
             {
-                _dataBaseService.EditTask(id, mainTask);
+                _dataBaseService.EditTask(mainTask.Id, mainTask);
             }
 
             if (task is SubTask subTask)
             {
-                _dataBaseService.EditSubtask(id, subTask);
+                _dataBaseService.EditSubtask(subTask.Id, subTask);
             }
         }
 

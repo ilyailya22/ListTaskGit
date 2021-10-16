@@ -81,7 +81,7 @@ namespace ListTask.Repository
         {
         }
 
-        public void Edit(int id, BaseTask task)
+        public void Edit(BaseTask task)
         {
         }
     }

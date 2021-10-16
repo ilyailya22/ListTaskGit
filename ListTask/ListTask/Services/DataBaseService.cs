@@ -67,6 +67,11 @@ namespace ListTask.Services
                 var subTasks = db.SubTasks.Where(x => x.Parent == id).ToList();
                 mainTask.Children = subTasks;
                 db.MainTasks.Remove(mainTask);
+                foreach (var i in subTasks)
+                {
+                    db.SubTasks.Remove(i);
+                }
+
                 db.SaveChanges();
             }
         }

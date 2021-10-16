@@ -12,6 +12,6 @@ namespace ListTask.Repository
 
         void PrintByld(int id, TaskType taskType);
 
-        void Edit(int id, BaseTask task);
+        void Edit(BaseTask task);
     }
 }

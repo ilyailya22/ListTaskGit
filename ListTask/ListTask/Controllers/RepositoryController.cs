@@ -43,16 +43,16 @@ namespace ListTask.Controllers
             _repository.PrintByld(number, taskType);
         }
 
-        public void Edit(int id, BaseTask task)
+        public void Edit(BaseTask task)
         {
             if (task is MainTask mainTask)
             {
-                _repository.Edit(id, mainTask);
+                _repository.Edit(mainTask);
             }
 
             if (task is SubTask subTask)
             {
-                _repository.Edit(id, subTask);
+                _repository.Edit(subTask);
             }
         }
 
@@ -140,7 +140,6 @@ namespace ListTask.Controllers
         private void Delete()
         {
             Console.WriteLine("Enter type task maintask or subtask and number to delete");
-            int number;
             string task = Console.ReadLine();
             TaskType taskType = TaskType.NoTask;
             if (task == "maintask")
@@ -153,9 +152,8 @@ namespace ListTask.Controllers
                 taskType = TaskType.SubTask;
             }
 
-            if (int.TryParse(Console.ReadLine(), out var parsenumber))
+            if (int.TryParse(Console.ReadLine(), out var number))
             {
-                number = parsenumber;
                 _repository.Delete(number, taskType);
             }
             else
@@ -260,16 +258,6 @@ namespace ListTask.Controllers
             try
             {
                 Console.WriteLine("Enter number to edit");
-                int number = 0;
-                if (int.TryParse(Console.ReadLine(), out var parsenumber))
-                {
-                    number = parsenumber;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
                 MainTask mainTaskobj = new MainTask();
                 Console.WriteLine("MainTask -- ");
                 Console.WriteLine("Enter Id, Name, About task, Date addition and Date end");
@@ -302,7 +290,7 @@ namespace ListTask.Controllers
                     Console.WriteLine("Enter correct value");
                 }
 
-                _repository.Edit(number, mainTaskobj);
+                _repository.Edit(mainTaskobj);
             }
             catch (Exception)
             {

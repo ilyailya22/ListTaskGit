@@ -3,6 +3,7 @@
     public enum TaskType
     {
         MainTask,
-        Subtask
+        SubTask,
+        NoTask
     }
 }

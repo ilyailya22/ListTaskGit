@@ -6,11 +6,11 @@ namespace ListTask.Repository
     {
         void Add(BaseTask task);
 
-        void Delete(int id, int task);
+        void Delete(int id, TaskType taskType);
 
         void DeleteAll();
 
-        void PrintByld(int id, int task);
+        void PrintByld(int id, TaskType taskType);
 
         void Edit(int id, BaseTask task);
     }

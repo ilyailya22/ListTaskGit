@@ -26,7 +26,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void Delete(int id, int task)
+        public void Delete(int id, TaskType taskType)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)
@@ -54,7 +54,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id, int task)
+        public void PrintByld(int id, TaskType taskType)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)

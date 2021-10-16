@@ -30,7 +30,7 @@ namespace ListTask.Repository
             }
         }
 
-        public async void Delete(int id, int task)
+        public async void Delete(int id, TaskType taskType)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id, int task)
+        public void PrintByld(int id, TaskType taskType)
         {
         }
 

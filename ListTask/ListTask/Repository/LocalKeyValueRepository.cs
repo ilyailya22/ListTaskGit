@@ -26,9 +26,26 @@ namespace ListTask.Repository
             {
                 _keyTaskRepository.Add(id, mainTask);
             }
+
+            if (task is SubTask subTask)
+            {
+                MainTask mainTaskConverted = new MainTask();
+                List<SubTask> subTasks = new List<SubTask>();
+                subTasks.Add(new SubTask
+                {
+                    Name = subTask.Name,
+                    Id = subTask.Id,
+                    Parent = subTask.Parent,
+                    About = subTask.About,
+                    DateAdd = subTask.DateAdd,
+                    DateDead = subTask.DateDead
+                });
+                mainTaskConverted.Children = subTasks;
+                _keyTaskRepository.Add(id, mainTaskConverted);
+            }
         }
 
-        public void Delete(int id, int task)
+        public void Delete(int id, TaskType taskType)
         {
                 _keyTaskRepository.Remove(id);
         }
@@ -42,7 +59,7 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int id, int task)
+        public void PrintByld(int id, TaskType taskType)
         {
             KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(id);
             Console.WriteLine(entry.Key + " : " + entry.Value);
@@ -62,6 +79,26 @@ namespace ListTask.Repository
                 else
                     _keyTaskRepository[id] = mainTask;
             }
-        }
+
+            if (task is SubTask subTask)
+            {
+                MainTask mainTaskConverted = new MainTask();
+                List<SubTask> subTasks = new List<SubTask>();
+                subTasks.Add(new SubTask
+                {
+                    Name = subTask.Name,
+                    Id = subTask.Id,
+                    Parent = subTask.Parent,
+                    About = subTask.About,
+                    DateAdd = subTask.DateAdd,
+                    DateDead = subTask.DateDead
+                });
+                mainTaskConverted.Children = subTasks;
+                if (!_keyTaskRepository.ContainsKey(id))
+                    _keyTaskRepository.Add(id, mainTaskConverted);
+                else
+                    _keyTaskRepository[id] = mainTaskConverted;
+            }
+            }
     }
 }

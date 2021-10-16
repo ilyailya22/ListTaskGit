@@ -1,15 +1,23 @@
 ﻿namespace ListTask
 {
-    public enum Constants
+    public static class Constants
     {
-        Addtask,
-        Addsubtask,
-        Print,
-        Delete,
-        Edit,
-        Drop,
-        Exit,
-        MainTask,
-        SubTask,
+        public const string Add = "add";
+
+        public const string Addtask = "add-task";
+
+        public const string Addsubtask = "add-subtask";
+
+        public const string Printall = "print_all";
+
+        public const string Print = "print";
+
+        public const string Delete = "delete";
+
+        public const string Edit = "edit";
+
+        public const string Drop = "drop";
+
+        public const string Exit = "exit";
     }
 }

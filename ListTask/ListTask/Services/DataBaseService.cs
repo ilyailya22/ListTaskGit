@@ -41,7 +41,7 @@ namespace ListTask.Services
             }
         }
 
-        public void EditTask(int id, MainTask mainTask)
+        public void EditTask(MainTask mainTask)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -50,7 +50,7 @@ namespace ListTask.Services
             }
         }
 
-        public void EditSubtask(int id, SubTask subTask)
+        public void EditSubtask(SubTask subTask)
         {
             using (ApplicationContext db = new ApplicationContext())
             {

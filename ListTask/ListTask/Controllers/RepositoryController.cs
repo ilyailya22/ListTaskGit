@@ -204,7 +204,7 @@ namespace ListTask.Controllers
             try
                 {
                 Console.WriteLine("SubTask -- ");
-                Console.WriteLine("Enter Id, Name, About task, Date addition and Date end");
+                Console.WriteLine("Enter Id, Parent, Name, About task, Date addition and Date end");
                 SubTask subTaskobj = new SubTask();
                 if (int.TryParse(Console.ReadLine(), out var id))
                 {

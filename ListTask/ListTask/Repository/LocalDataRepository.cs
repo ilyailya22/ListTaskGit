@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ListTask.Models;
 
 namespace ListTask.Repository
@@ -27,21 +28,14 @@ namespace ListTask.Repository
 
             if (task is SubTask subTask)
             {
-                MainTask mainTaskConverted = new MainTask();
-                List<SubTask> subTasks = new List<SubTask>();
-                subTasks.Add(new SubTask
+                var parent = _taskRepository.FirstOrDefault(i => i.Id == subTask.Parent);
+                if (parent != null)
                 {
-                    Name = subTask.Name,
-                    Id = subTask.Id,
-                    Parent = subTask.Parent,
-                    About = subTask.About,
-                    DateAdd = subTask.DateAdd,
-                    DateDead = subTask.DateDead
-                });
-                mainTaskConverted.Children = subTasks;
-                _taskRepository.Add(mainTaskConverted);
+                    parent.Children.Add(subTask);
+                    _taskRepository.Add(parent);
+                }
             }
-            }
+        }
 
         public void Delete(int id, TaskType taskType)
         {
@@ -114,20 +108,13 @@ namespace ListTask.Repository
 
             if (task is SubTask subTask)
             {
-                MainTask mainTaskConverted = new MainTask();
-                List<SubTask> subTasks = new List<SubTask>();
-                subTasks.Add(new SubTask
+                var parent = _taskRepository.FirstOrDefault(i => i.Id == subTask.Parent);
+                if (parent != null)
                 {
-                    Name = subTask.Name,
-                    Id = subTask.Id,
-                    Parent = subTask.Parent,
-                    About = subTask.About,
-                    DateAdd = subTask.DateAdd,
-                    DateDead = subTask.DateDead
-                });
-                mainTaskConverted.Children = subTasks;
-                _taskRepository.Insert(count, mainTaskConverted);
+                    parent.Children.Add(subTask);
+                    _taskRepository.Insert(count, parent);
+                }
             }
-            }
+        }
     }
 }

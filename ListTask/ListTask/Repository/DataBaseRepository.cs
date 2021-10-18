@@ -47,12 +47,12 @@ namespace ListTask.Repository
         {
             if (task is MainTask mainTask)
             {
-                _dataBaseService.EditTask(mainTask.Id, mainTask);
+                _dataBaseService.EditTask(mainTask);
             }
 
             if (task is SubTask subTask)
             {
-                _dataBaseService.EditSubtask(subTask.Id, subTask);
+                _dataBaseService.EditSubtask(subTask);
             }
         }
 

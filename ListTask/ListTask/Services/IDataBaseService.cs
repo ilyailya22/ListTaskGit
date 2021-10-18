@@ -12,9 +12,9 @@ namespace ListTask.Services
 
         public SubTask ReadSubtask(int id);
 
-        public void EditTask(int id, MainTask mainTask);
+        public void EditTask(MainTask mainTask);
 
-        public void EditSubtask(int id, SubTask subTask);
+        public void EditSubtask(SubTask subTask);
 
         public void DeleteTask(int id);
 

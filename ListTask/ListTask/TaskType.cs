@@ -4,6 +4,5 @@
     {
         MainTask,
         SubTask,
-        NoTask
     }
 }

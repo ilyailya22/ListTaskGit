@@ -115,21 +115,22 @@ namespace ListTask.Controllers
             Console.WriteLine("Enter type task maintask or subtask and number to print");
             int number;
             string task = Console.ReadLine();
-            TaskType taskType = TaskType.NoTask;
-            if (task == "maintask")
-            {
-                taskType = TaskType.MainTask;
-            }
-
-            if (task == "subtask")
-            {
-                taskType = TaskType.SubTask;
-            }
+            TaskType taskType;
 
             if (int.TryParse(Console.ReadLine(), out var parsenumber))
             {
                 number = parsenumber;
-                _repository.PrintByld(number, taskType);
+                if (task == "maintask")
+                {
+                    taskType = TaskType.MainTask;
+                    _repository.PrintByld(number, taskType);
+                }
+
+                if (task == "subtask")
+                {
+                    taskType = TaskType.SubTask;
+                    _repository.PrintByld(number, taskType);
+                }
             }
             else
             {
@@ -141,20 +142,20 @@ namespace ListTask.Controllers
         {
             Console.WriteLine("Enter type task maintask or subtask and number to delete");
             string task = Console.ReadLine();
-            TaskType taskType = TaskType.NoTask;
-            if (task == "maintask")
-            {
-                taskType = TaskType.MainTask;
-            }
-
-            if (task == "subtask")
-            {
-                taskType = TaskType.SubTask;
-            }
-
+            TaskType taskType;
             if (int.TryParse(Console.ReadLine(), out var number))
             {
-                _repository.Delete(number, taskType);
+                if (task == "maintask")
+                {
+                    taskType = TaskType.MainTask;
+                    _repository.Delete(number, taskType);
+                }
+
+                if (task == "subtask")
+                {
+                    taskType = TaskType.SubTask;
+                    _repository.Delete(number, taskType);
+                }
             }
             else
             {
@@ -201,8 +202,6 @@ namespace ListTask.Controllers
 
         private void AddSubtask()
         {
-            try
-                {
                 Console.WriteLine("SubTask -- ");
                 Console.WriteLine("Enter Id, Parent, Name, About task, Date addition and Date end");
                 SubTask subTaskobj = new SubTask();
@@ -245,12 +244,6 @@ namespace ListTask.Controllers
                 }
 
                 _repository.Add(subTaskobj);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine(typeof(Exception));
-                    Console.WriteLine("Enter correct value");
-                }
         }
 
         private void Edit()

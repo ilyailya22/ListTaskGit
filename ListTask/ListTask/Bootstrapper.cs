@@ -18,7 +18,7 @@ namespace ListTask
         {
             Kernel.Bind<IRequestService>().To<RequestService>();
             Kernel.Bind<IDataBaseService>().To<DataBaseService>();
-            Kernel.Bind<IRepository>().To<DataBaseRepository>();
+            Kernel.Bind<IRepository>().To<LocalDataRepository>();
         }
     }
 }

@@ -32,7 +32,6 @@ namespace ListTask.Repository
                 if (parent != null)
                 {
                     parent.Children.Add(subTask);
-                    _taskRepository.Add(parent);
                 }
             }
         }

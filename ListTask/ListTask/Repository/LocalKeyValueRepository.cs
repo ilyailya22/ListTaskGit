@@ -77,10 +77,6 @@ namespace ListTask.Repository
                 if (parent.Value != null)
                 {
                     parent.Value.Children.Add(subTask);
-                    if (!_keyTaskRepository.ContainsKey(subTask.Id))
-                        _keyTaskRepository.Add(parent.Key, parent.Value);
-                    else
-                        _keyTaskRepository[parent.Key] = parent.Value;
                 }
             }
             }

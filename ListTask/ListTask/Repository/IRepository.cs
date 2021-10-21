@@ -1,20 +1,17 @@
-﻿using System;
-using ListTask.Models;
+﻿using ListTask.Models;
 
 namespace ListTask.Repository
 {
     public interface IRepository
     {
-        void Add(MainTask taskRepository);
+        void Add(BaseTask task);
 
-        void Delete(int number);
+        void Delete(int id, TaskType taskType);
 
         void DeleteAll();
 
-        void Print();
+        void PrintByld(int id, TaskType taskType);
 
-        void PrintByld(int number);
-
-        void Edit(int number, MainTask task);
+        void Edit(BaseTask task);
     }
 }

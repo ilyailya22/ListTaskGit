@@ -7,42 +7,52 @@ namespace ListTask.Repository
 {
     public class LocalKeyValueRepository : IRepository
     {
-        private Dictionary<Guid, MainTask> _keyTaskRepository;
+        private Dictionary<int, MainTask> _keyTaskRepository;
 
         public LocalKeyValueRepository()
         {
-            _keyTaskRepository = new Dictionary<Guid, MainTask>();
+            _keyTaskRepository = new Dictionary<int, MainTask>();
         }
 
         public LocalKeyValueRepository(int size)
         {
-            _keyTaskRepository = new Dictionary<Guid, MainTask>(size);
+            _keyTaskRepository = new Dictionary<int, MainTask>(size);
         }
 
-        public void Add(MainTask taskRepository)
+        public void Add(BaseTask task)
         {
-            Guid id = Guid.NewGuid();
-            _keyTaskRepository.Add(id, taskRepository);
+            if (task is MainTask mainTask)
+            {
+                _keyTaskRepository.Add(mainTask.Id, mainTask);
+            }
+
+            if (task is SubTask subTask)
+            {
+                var parent = _keyTaskRepository.FirstOrDefault(e => e.Key == subTask.Parent);
+                if (parent.Value != null)
+                {
+                    parent.Value.Children.Add(subTask);
+                }
+            }
         }
 
-        public void Delete(int number)
+        public void Delete(int id, TaskType taskType)
         {
-            Guid id = Guid.NewGuid();
-            _keyTaskRepository.Remove(id);
+                _keyTaskRepository.Remove(id);
         }
 
         public void Print()
         {
             for (int i = 0; i < _keyTaskRepository.Count; i++)
             {
-                KeyValuePair<Guid, MainTask> entry = _keyTaskRepository.ElementAt(i);
+                KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(i);
                 Console.WriteLine(entry.Key + " : " + entry.Value);
             }
         }
 
-        public void PrintByld(int number)
+        public void PrintByld(int id, TaskType taskType)
         {
-            KeyValuePair<Guid, MainTask> entry = _keyTaskRepository.ElementAt(number);
+            KeyValuePair<int, MainTask> entry = _keyTaskRepository.ElementAt(id);
             Console.WriteLine(entry.Key + " : " + entry.Value);
         }
 
@@ -51,13 +61,28 @@ namespace ListTask.Repository
             _keyTaskRepository.Clear();
         }
 
-        public void Edit(int number, MainTask task)
+        public void Edit(BaseTask task)
         {
-            Guid id = Guid.NewGuid();
-            if (!_keyTaskRepository.ContainsKey(id))
-                _keyTaskRepository.Add(id, task);
-            else
-                _keyTaskRepository[id] = task;
-        }
+            if (task is MainTask mainTask)
+            {
+                if (!_keyTaskRepository.ContainsKey(mainTask.Id))
+                    _keyTaskRepository.Add(mainTask.Id, mainTask);
+                else
+                    _keyTaskRepository[mainTask.Id] = mainTask;
+            }
+
+            if (task is SubTask subTask)
+            {
+                var parent = _keyTaskRepository.FirstOrDefault(e => e.Key == subTask.Parent);
+                if (parent.Value != null)
+                {
+                    parent.Value.Children.Add(subTask);
+                    if (!_keyTaskRepository.ContainsKey(subTask.Id))
+                        _keyTaskRepository.Add(parent.Key, parent.Value);
+                    else
+                        _keyTaskRepository[parent.Key] = parent.Value;
+                }
+            }
+            }
     }
 }

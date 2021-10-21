@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ListTask;
 using ListTask.Models;
 using ListTask.Repository;
 
@@ -15,14 +14,23 @@ namespace ListTask.Controllers
             _repository = repository;
         }
 
-        public void Add(MainTask taskRepository)
+        public void Add(BaseTask task)
         {
-            _repository.Add(taskRepository);
+            if (task is MainTask mainTask)
+            {
+                _repository.Add(mainTask);
+                return;
+            }
+
+            if (task is SubTask subTask)
+            {
+                _repository.Add(subTask);
+            }
         }
 
-        public void Delete(int number)
+        public void Delete(int id, TaskType taskType)
         {
-            _repository.Delete(number);
+            _repository.Delete(id, taskType);
         }
 
         public void DeleteAll()
@@ -30,36 +38,34 @@ namespace ListTask.Controllers
             _repository.DeleteAll();
         }
 
-        public void Print()
+        public void PrintByld(int number, TaskType taskType)
         {
-            _repository.Print();
+            _repository.PrintByld(number, taskType);
         }
 
-        public void PrintByld(int number)
+        public void Edit(BaseTask task)
         {
-            _repository.PrintByld(number);
-        }
+            if (task is MainTask mainTask)
+            {
+                _repository.Edit(mainTask);
+            }
 
-        public void Edit(int number, MainTask task)
-        {
-            _repository.Edit(number, task);
+            if (task is SubTask subTask)
+            {
+                _repository.Edit(subTask);
+            }
         }
 
         public void Menu()
         {
-            string menu;
             do
             {
-                Console.WriteLine("add\nadd-task\nadd-subtask\nprint-all\nprint\nedit\ndrop\nexit");
-                menu = Console.ReadLine();
+                Console.WriteLine("Enter what need to do");
+                Console.WriteLine("for add maintask - add-task\nFor add subtask - add-subtask\nFor print any task - print\nFor edit task - edit\nFor delete task - delete\ndrop\nexit - exit");
+                string menu = Console.ReadLine();
+                Console.Clear();
                 switch (menu)
                 {
-                    case Constants.Add:
-                        {
-                            Add();
-                            break;
-                        }
-
                     case Constants.Addtask:
                         {
                             AddTask();
@@ -72,15 +78,9 @@ namespace ListTask.Controllers
                             break;
                         }
 
-                    case Constants.Printall:
-                        {
-                            _repository.Print();
-                            break;
-                        }
-
                     case Constants.Print:
                         {
-                            PrintAll();
+                            PrintByld();
                             break;
                         }
 
@@ -110,94 +110,27 @@ namespace ListTask.Controllers
             while (true);
         }
 
-        private void Add()
+        private void PrintByld()
         {
-            try
-            {
-                Console.WriteLine("MainTask -- ");
-                Console.WriteLine("Enter Number, About task, Date addition and Date end");
-                MainTask mainTaskobj = new MainTask();
-                if (int.TryParse(Console.ReadLine(), out var number1))
-                {
-                    mainTaskobj.Number = number1;
-                }
-
-                mainTaskobj.Id = Guid.NewGuid();
-                mainTaskobj.About = Console.ReadLine();
-                if (DateTime.TryParse(Console.ReadLine(), out var datetime1))
-                {
-                    mainTaskobj.DateAdd = datetime1;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datedead1))
-                {
-                    mainTaskobj.DateDead = datedead1;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                List<SubTask> subTasks = new List<SubTask>();
-                Console.WriteLine("SubTask -- ");
-                Console.WriteLine("Enter Number, About task, Date addition and Date end");
-                int subnumber = 0;
-                DateTime subdateadd = new DateTime(00, 00, 0000);
-                DateTime subdatedead = new DateTime(00, 00, 0000);
-                if (int.TryParse(Console.ReadLine(), out var number2))
-                {
-                    subnumber = number2;
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datetime2))
-                {
-                    subdateadd = datetime2;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datedead2))
-                {
-                    subdatedead = datedead2;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
-                subTasks.Add(new SubTask
-                {
-                    Number = subnumber,
-                    Id = Guid.NewGuid(),
-                    Parent = Guid.NewGuid(),
-                    About = Console.ReadLine(),
-                    DateAdd = subdateadd,
-                    DateDead = subdatedead
-                });
-                mainTaskobj.Children = subTasks;
-                _repository.Add(mainTaskobj);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(typeof(Exception));
-                Console.WriteLine("Enter correct value");
-            }
-        }
-
-        private void PrintAll()
-        {
-            Console.WriteLine("Enter number to print");
+            Console.WriteLine("Enter type task maintask or subtask and number to print");
             int number;
+            string task = Console.ReadLine();
+            TaskType taskType;
+
             if (int.TryParse(Console.ReadLine(), out var parsenumber))
             {
                 number = parsenumber;
-                _repository.PrintByld(number);
+                if (task == "maintask")
+                {
+                    taskType = TaskType.MainTask;
+                    _repository.PrintByld(number, taskType);
+                }
+
+                if (task == "subtask")
+                {
+                    taskType = TaskType.SubTask;
+                    _repository.PrintByld(number, taskType);
+                }
             }
             else
             {
@@ -207,12 +140,22 @@ namespace ListTask.Controllers
 
         private void Delete()
         {
-            Console.WriteLine("Enter number to delete");
-            int number;
-            if (int.TryParse(Console.ReadLine(), out var parsenumber))
+            Console.WriteLine("Enter type task maintask or subtask and number to delete");
+            string task = Console.ReadLine();
+            TaskType taskType;
+            if (int.TryParse(Console.ReadLine(), out var number))
             {
-                number = parsenumber;
-                _repository.Delete(number);
+                if (task == "maintask")
+                {
+                    taskType = TaskType.MainTask;
+                    _repository.Delete(number, taskType);
+                }
+
+                if (task == "subtask")
+                {
+                    taskType = TaskType.SubTask;
+                    _repository.Delete(number, taskType);
+                }
             }
             else
             {
@@ -222,21 +165,19 @@ namespace ListTask.Controllers
 
         private void AddTask()
         {
-            try
-            {
                 Console.WriteLine("MainTask -- ");
-                Console.WriteLine("Enter Number, About task, Date addition and Date end");
+                Console.WriteLine("Enter Id, Name, About task, Date addition and Date end");
                 MainTask mainTaskobj = new MainTask();
-                if (int.TryParse(Console.ReadLine(), out var number))
+                if (int.TryParse(Console.ReadLine(), out var id))
                 {
-                    mainTaskobj.Number = number;
+                    mainTaskobj.Id = id;
                 }
                 else
                 {
                     Console.WriteLine("Enter correct value");
                 }
 
-                mainTaskobj.Id = Guid.NewGuid();
+                mainTaskobj.Name = Console.ReadLine();
                 mainTaskobj.About = Console.ReadLine();
                 if (DateTime.TryParse(Console.ReadLine(), out var datetime))
                 {
@@ -257,65 +198,52 @@ namespace ListTask.Controllers
                 }
 
                 _repository.Add(mainTaskobj);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(typeof(Exception));
-                Console.WriteLine("Enter correct value");
-            }
         }
 
         private void AddSubtask()
         {
-            try
-                {
                 Console.WriteLine("SubTask -- ");
-                Console.WriteLine("Enter Number, About task, Date addition and Date end");
-                MainTask mainTaskobj = new MainTask();
-                List<SubTask> subTasks = new List<SubTask>();
-                int subnumber = 0;
-                DateTime subdateadd = new DateTime(00, 00, 0000);
-                DateTime subdatedead = new DateTime(00, 00, 0000);
-                if (int.TryParse(Console.ReadLine(), out var number2))
+                Console.WriteLine("Enter Id, Parent, Name, About task, Date addition and Date end");
+                SubTask subTaskobj = new SubTask();
+                if (int.TryParse(Console.ReadLine(), out var id))
                 {
-                    subnumber = number2;
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datetime2))
-                {
-                    subdateadd = datetime2;
+                    subTaskobj.Id = id;
                 }
                 else
                 {
                     Console.WriteLine("Enter correct value");
                 }
 
-                if (DateTime.TryParse(Console.ReadLine(), out var datedead2))
+                if (int.TryParse(Console.ReadLine(), out var parent))
                 {
-                    subdatedead = datedead2;
+                    subTaskobj.Parent = parent;
                 }
                 else
                 {
                     Console.WriteLine("Enter correct value");
                 }
 
-                subTasks.Add(new SubTask
+                subTaskobj.Name = Console.ReadLine();
+                subTaskobj.About = Console.ReadLine();
+                if (DateTime.TryParse(Console.ReadLine(), out var datetime))
                 {
-                    Number = subnumber,
-                    Id = Guid.NewGuid(),
-                    Parent = Guid.NewGuid(),
-                    About = Console.ReadLine(),
-                    DateAdd = subdateadd,
-                    DateDead = subdatedead
-                });
-                mainTaskobj.Children = subTasks;
-                _repository.Add(mainTaskobj);
+                    subTaskobj.DateAdd = datetime;
                 }
-                catch (Exception)
+                else
                 {
-                    Console.WriteLine(typeof(Exception));
                     Console.WriteLine("Enter correct value");
                 }
+
+                if (DateTime.TryParse(Console.ReadLine(), out var datedead))
+                {
+                    subTaskobj.DateDead = datedead;
+                }
+                else
+                {
+                    Console.WriteLine("Enter correct value");
+                }
+
+                _repository.Add(subTaskobj);
         }
 
         private void Edit()
@@ -323,61 +251,39 @@ namespace ListTask.Controllers
             try
             {
                 Console.WriteLine("Enter number to edit");
-                int number = 0;
-                if (int.TryParse(Console.ReadLine(), out var parsenumber))
-                {
-                    number = parsenumber;
-                }
-                else
-                {
-                    Console.WriteLine("Enter correct value");
-                }
-
                 MainTask mainTaskobj = new MainTask();
                 Console.WriteLine("MainTask -- ");
-                mainTaskobj.Number = int.Parse(Console.ReadLine());
-                mainTaskobj.Id = Guid.NewGuid();
+                Console.WriteLine("Enter Id, Name, About task, Date addition and Date end");
+                if (int.TryParse(Console.ReadLine(), out var id))
+                {
+                    mainTaskobj.Id = id;
+                }
+                else
+                {
+                    Console.WriteLine("Enter correct value");
+                }
+
+                mainTaskobj.Name = Console.ReadLine();
                 mainTaskobj.About = Console.ReadLine();
-                mainTaskobj.DateAdd = DateTime.Parse(Console.ReadLine());
-                mainTaskobj.DateDead = DateTime.Parse(Console.ReadLine());
-                List<SubTask> subTasks = new List<SubTask>();
-                int subnumber = 0;
-                DateTime subdateadd = new DateTime(00, 00, 0000);
-                DateTime subdatedead = new DateTime(00, 00, 0000);
-                if (int.TryParse(Console.ReadLine(), out var number2))
+                if (DateTime.TryParse(Console.ReadLine(), out var datetime))
                 {
-                    subnumber = number2;
-                }
-
-                if (DateTime.TryParse(Console.ReadLine(), out var datetime2))
-                {
-                    subdateadd = datetime2;
+                    mainTaskobj.DateAdd = datetime;
                 }
                 else
                 {
                     Console.WriteLine("Enter correct value");
                 }
 
-                if (DateTime.TryParse(Console.ReadLine(), out var datedead2))
+                if (DateTime.TryParse(Console.ReadLine(), out var datedead))
                 {
-                    subdatedead = datedead2;
+                    mainTaskobj.DateDead = datedead;
                 }
                 else
                 {
                     Console.WriteLine("Enter correct value");
                 }
 
-                subTasks.Add(new SubTask
-                {
-                    Number = subnumber,
-                    Id = Guid.NewGuid(),
-                    Parent = Guid.NewGuid(),
-                    About = Console.ReadLine(),
-                    DateAdd = subdateadd,
-                    DateDead = subdatedead
-                });
-                mainTaskobj.Children = subTasks;
-                _repository.Edit(number, mainTaskobj);
+                _repository.Edit(mainTaskobj);
             }
             catch (Exception)
             {

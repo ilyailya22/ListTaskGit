@@ -1,7 +1,6 @@
 ﻿using System;
 using ListTask;
 using ListTask.Controllers;
-using ListTask.Models;
 using ListTask.Repository;
 using Ninject;
 
@@ -12,8 +11,8 @@ namespace Main
         public static void Main(string[] args)
         {
             var bootstrapper = new Bootstrapper();
-            var localDataRepository = new RepositoryController(Bootstrapper.Kernel.Get<IRepository>());
-            localDataRepository.Menu();
+            var dataBaseRepository = new RepositoryController(Bootstrapper.Kernel.Get<IRepository>());
+            dataBaseRepository.Menu();
             Console.ReadKey();
         }
     }

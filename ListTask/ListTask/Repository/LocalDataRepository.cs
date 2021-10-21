@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ListTask.Models;
-using Newtonsoft.Json;
 
 namespace ListTask.Repository
 {
@@ -19,17 +19,29 @@ namespace ListTask.Repository
             _taskRepository = new List<MainTask>(size);
         }
 
-        public void Add(MainTask taskRepository)
+        public void Add(BaseTask task)
         {
-            _taskRepository.Add(taskRepository);
+            if (task is MainTask mainTask)
+            {
+                _taskRepository.Add(mainTask);
+            }
+
+            if (task is SubTask subTask)
+            {
+                var parent = _taskRepository.FirstOrDefault(i => i.Id == subTask.Parent);
+                if (parent != null)
+                {
+                    parent.Children.Add(subTask);
+                }
+            }
         }
 
-        public void Delete(int number)
+        public void Delete(int id, TaskType taskType)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)
             {
-                if (i.Number == number)
+                if (i.Id == id)
                 {
                     tmp = 1;
                     _taskRepository.Remove(i);
@@ -52,12 +64,12 @@ namespace ListTask.Repository
             }
         }
 
-        public void PrintByld(int number)
+        public void PrintByld(int id, TaskType taskType)
         {
             int tmp = 0;
             foreach (var i in _taskRepository)
             {
-                if (i.Number == number)
+                if (i.Id == id)
                 {
                     tmp = 1;
                     i.ShowNameDate();
@@ -77,18 +89,31 @@ namespace ListTask.Repository
             _taskRepository.Clear();
         }
 
-        public void Edit(int number, MainTask task)
+        public void Edit(BaseTask task)
         {
             int count = 0;
             foreach (MainTask s in _taskRepository)
             {
-                if (s.Number == number)
+                if (s.Id == task.Id)
                     break;
                 count++;
             }
 
             _taskRepository.RemoveAt(count);
-            _taskRepository.Insert(count, task);
+            if (task is MainTask mainTask)
+            {
+                _taskRepository.Insert(count, mainTask);
+            }
+
+            if (task is SubTask subTask)
+            {
+                var parent = _taskRepository.FirstOrDefault(i => i.Id == subTask.Parent);
+                if (parent != null)
+                {
+                    parent.Children.Add(subTask);
+                    _taskRepository.Insert(count, parent);
+                }
+            }
         }
     }
 }

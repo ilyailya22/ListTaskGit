@@ -81,9 +81,14 @@ namespace ListTask.Repository
             }
             }
 
-        public IEnumerable<BaseTask> GetAllTasks()
+        public IEnumerable<MainTask> GetAllTasks()
         {
-            return _keyTaskRepository as IEnumerable<BaseTask>;
+            return _keyTaskRepository as IEnumerable<MainTask>;
+        }
+
+        public MainTask Get(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

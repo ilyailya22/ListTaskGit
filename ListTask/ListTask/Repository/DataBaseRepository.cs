@@ -57,7 +57,12 @@ namespace ListTask.Repository
             }
         }
 
-        public IEnumerable<BaseTask> GetAllTasks()
+        public MainTask Get(int id)
+        {
+            return _dataBaseService.ReadTask(id);
+        }
+
+        public IEnumerable<MainTask> GetAllTasks()
         {
             return _dataBaseService.GetAllTasks();
         }

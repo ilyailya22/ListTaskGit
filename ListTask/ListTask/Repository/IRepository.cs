@@ -15,6 +15,8 @@ namespace ListTask.Repository
 
         void Edit(BaseTask task);
 
-        IEnumerable<BaseTask> GetAllTasks();
+        IEnumerable<MainTask> GetAllTasks();
+
+        MainTask Get(int id);
     }
 }

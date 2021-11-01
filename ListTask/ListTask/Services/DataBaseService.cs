@@ -85,21 +85,17 @@ namespace ListTask.Services
             }
         }
 
-        public List<BaseTask> GetAllTasks()
+        public List<MainTask> GetAllTasks()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                List<BaseTask> tasks = new List<BaseTask>();
-                foreach (var mainTask in db.MainTasks)
+                List<MainTask> tasks = new List<MainTask>();
+                var maintasks = db.MainTasks.ToList();
+                foreach (var mainTask in maintasks)
                 {
                     var subTasks = db.SubTasks.Where(x => x.Parent == mainTask.Id).ToList();
                     mainTask.Children = subTasks;
                     tasks.Add(mainTask);
-                }
-
-                foreach (var subTask in db.SubTasks)
-                {
-                    tasks.Add(subTask);
                 }
 
                 return tasks;

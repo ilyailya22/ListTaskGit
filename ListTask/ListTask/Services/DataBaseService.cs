@@ -85,7 +85,7 @@ namespace ListTask.Services
             }
         }
 
-        public List<MainTask> GetAllTasks()
+        public List<MainTask> Get()
         {
             using (ApplicationContext db = new ApplicationContext())
             {

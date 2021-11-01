@@ -81,12 +81,12 @@ namespace ListTask.Repository
             }
             }
 
-        public IEnumerable<MainTask> GetAllTasks()
+        public IEnumerable<MainTask> Get()
         {
             return _keyTaskRepository as IEnumerable<MainTask>;
         }
 
-        public MainTask Get(int id)
+        public MainTask Read(int id)
         {
             throw new NotImplementedException();
         }

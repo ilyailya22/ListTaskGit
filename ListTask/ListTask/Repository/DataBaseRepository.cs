@@ -57,14 +57,9 @@ namespace ListTask.Repository
             }
         }
 
-        public MainTask Get(int id)
+        public IEnumerable<MainTask> Get()
         {
-            return _dataBaseService.ReadTask(id);
-        }
-
-        public IEnumerable<MainTask> GetAllTasks()
-        {
-            return _dataBaseService.GetAllTasks();
+            return _dataBaseService.Get();
         }
 
         public void PrintByld(int id, TaskType taskType)
@@ -80,6 +75,11 @@ namespace ListTask.Repository
                 SubTask subtask = _dataBaseService.ReadSubtask(id);
                 subtask.ShowNameDate();
             }
+        }
+
+        public MainTask Read(int id)
+        {
+            return _dataBaseService.ReadTask(id);
         }
     }
 }

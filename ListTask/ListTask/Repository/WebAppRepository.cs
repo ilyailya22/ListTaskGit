@@ -86,12 +86,12 @@ namespace ListTask.Repository
         {
         }
 
-        public IEnumerable<MainTask> GetAllTasks()
+        public IEnumerable<MainTask> Get()
         {
             throw new NotImplementedException();
         }
 
-        public MainTask Get(int id)
+        public MainTask Read(int id)
         {
             throw new NotImplementedException();
         }

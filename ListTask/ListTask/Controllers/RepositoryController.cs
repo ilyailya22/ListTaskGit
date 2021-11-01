@@ -58,7 +58,7 @@ namespace ListTask.Controllers
 
         public void PrintAll()
         {
-            _repository.Get();
+            _repository.ReadAll();
         }
 
         public void Menu()
@@ -109,7 +109,7 @@ namespace ListTask.Controllers
 
                     case Constants.Printall:
                         {
-                            Console.WriteLine(_repository.Get());
+                            _repository.ReadAll();
                             break;
                         }
 

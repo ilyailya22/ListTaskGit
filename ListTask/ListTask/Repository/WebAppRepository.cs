@@ -86,12 +86,12 @@ namespace ListTask.Repository
         {
         }
 
-        public IEnumerable<MainTask> Get()
+        public IEnumerable<MainTask> ReadAll()
         {
             throw new NotImplementedException();
         }
 
-        public MainTask Read(int id)
+        public MainTask ReadByld(int id)
         {
             throw new NotImplementedException();
         }

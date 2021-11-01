@@ -57,9 +57,9 @@ namespace ListTask.Repository
             }
         }
 
-        public IEnumerable<MainTask> Get()
+        public IEnumerable<MainTask> ReadAll()
         {
-            return _dataBaseService.Get();
+            return _dataBaseService.ReadAll();
         }
 
         public void PrintByld(int id, TaskType taskType)
@@ -77,7 +77,7 @@ namespace ListTask.Repository
             }
         }
 
-        public MainTask Read(int id)
+        public MainTask ReadByld(int id)
         {
             return _dataBaseService.ReadTask(id);
         }

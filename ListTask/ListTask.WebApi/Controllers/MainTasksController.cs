@@ -19,15 +19,15 @@ namespace ListTask.WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<MainTask> Get()
+        public IEnumerable<MainTask> ReadAll()
         {
-            return _repository.Get();
+            return _repository.ReadAll();
         }
 
         [HttpGet("{id}")]
-        public BaseTask Read(int id)
+        public BaseTask ReadByld(int id)
         {
-            return _repository.Read(id);
+            return _repository.ReadByld(id);
         }
     }
 }

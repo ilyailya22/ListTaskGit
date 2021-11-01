@@ -115,5 +115,10 @@ namespace ListTask.Repository
                 }
             }
         }
+
+        public IEnumerable<BaseTask> GetAllTasks()
+        {
+            return _taskRepository;
+        }
     }
 }

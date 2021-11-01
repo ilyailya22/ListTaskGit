@@ -8,7 +8,7 @@
 
         public const string Addsubtask = "add-subtask";
 
-        public const string Printall = "print_all";
+        public const string Printall = "print-all";
 
         public const string Print = "print";
 

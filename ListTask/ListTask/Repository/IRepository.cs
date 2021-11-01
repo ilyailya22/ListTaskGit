@@ -1,4 +1,5 @@
-﻿using ListTask.Models;
+﻿using System.Collections.Generic;
+using ListTask.Models;
 
 namespace ListTask.Repository
 {
@@ -13,5 +14,7 @@ namespace ListTask.Repository
         void PrintByld(int id, TaskType taskType);
 
         void Edit(BaseTask task);
+
+        IEnumerable<BaseTask> GetAllTasks();
     }
 }

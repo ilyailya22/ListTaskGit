@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ListTask.Models;
 using ListTask.Services;
 
@@ -56,16 +57,23 @@ namespace ListTask.Repository
             }
         }
 
+        public IEnumerable<BaseTask> GetAllTasks()
+        {
+            return _dataBaseService.GetAllTasks();
+        }
+
         public void PrintByld(int id, TaskType taskType)
         {
             if (taskType == TaskType.MainTask)
             {
-                _dataBaseService.ReadTask(id);
+                MainTask maintask = _dataBaseService.ReadTask(id);
+                maintask.ShowNameDate();
             }
 
             if (taskType == TaskType.SubTask)
             {
-                _dataBaseService.ReadSubtask(id);
+                SubTask subtask = _dataBaseService.ReadSubtask(id);
+                subtask.ShowNameDate();
             }
         }
     }

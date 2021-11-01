@@ -8,6 +8,7 @@ namespace ListTask.WebApi
     {
         public static void Main(string[] args)
         {
+            var bootstrapper = new Bootstrapper();
             CreateHostBuilder(args).Build().Run();
         }
 

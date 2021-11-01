@@ -15,7 +15,6 @@ namespace ListTask.WebApi.Controllers
 
         public MainTasksController()
         {
-            var bootstrapper = new Bootstrapper();
             _repository = Bootstrapper.Kernel.Get<IRepository>();
         }
 

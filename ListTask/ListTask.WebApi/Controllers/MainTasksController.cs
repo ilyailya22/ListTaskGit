@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using ListTask.Models;
 using ListTask.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +25,39 @@ namespace ListTask.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public BaseTask ReadByld(int id)
+        public ActionResult<MainTask> ReadByld(int id)
         {
-            return _repository.ReadByld(id);
+            return Ok(_repository.ReadByld(id));
+        }
+
+        [HttpPost]
+        public ActionResult<MainTask> Post(MainTask mainTask)
+        {
+            if (mainTask == null)
+            {
+                return BadRequest();
+            }
+
+            _repository.Add(mainTask);
+            return Ok(mainTask);
+        }
+
+        [HttpPut]
+        public ActionResult<MainTask> Put(MainTask mainTask)
+        {
+            if (mainTask == null)
+            {
+                return BadRequest();
+            }
+
+            _repository.Edit(mainTask);
+            return Ok(mainTask);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _repository.Delete(id, TaskType.MainTask);
         }
     }
 }

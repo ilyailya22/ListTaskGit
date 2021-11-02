@@ -81,12 +81,22 @@ namespace ListTask.Repository
             }
             }
 
-        public IEnumerable<MainTask> ReadAll()
+        public IEnumerable<MainTask> ReadAllMainTask()
         {
-            return _keyTaskRepository as IEnumerable<MainTask>;
+            throw new NotImplementedException();
         }
 
-        public MainTask ReadByld(int id)
+        public IEnumerable<SubTask> ReadAllSubTask()
+        {
+            throw new NotImplementedException();
+        }
+
+        public MainTask ReadByldMainTask(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SubTask ReadByldSubTask(int id)
         {
             throw new NotImplementedException();
         }

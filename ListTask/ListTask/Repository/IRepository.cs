@@ -15,8 +15,12 @@ namespace ListTask.Repository
 
         void Edit(BaseTask task);
 
-        IEnumerable<MainTask> ReadAll();
+        IEnumerable<MainTask> ReadAllMainTask();
 
-        MainTask ReadByld(int id);
+        IEnumerable<SubTask> ReadAllSubTask();
+
+        MainTask ReadByldMainTask(int id);
+
+        SubTask ReadByldSubTask(int id);
     }
 }

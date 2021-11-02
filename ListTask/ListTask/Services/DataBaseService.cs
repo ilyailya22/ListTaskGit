@@ -85,17 +85,32 @@ namespace ListTask.Services
             }
         }
 
-        public List<MainTask> ReadAll()
+        public List<MainTask> ReadAllMainTask()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 List<MainTask> tasks = new List<MainTask>();
-                var maintasks = db.MainTasks.ToList();
-                foreach (var mainTask in maintasks)
+                var mainTasks = db.MainTasks.ToList();
+                foreach (var mainTask in mainTasks)
                 {
                     var subTasks = db.SubTasks.Where(x => x.Parent == mainTask.Id).ToList();
                     mainTask.Children = subTasks;
                     tasks.Add(mainTask);
+                }
+
+                return tasks;
+            }
+        }
+
+        public List<SubTask> ReadAllSubTask()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                List<SubTask> tasks = new List<SubTask>();
+                var subTasks = db.SubTasks.ToList();
+                foreach (var subTask in subTasks)
+                {
+                    tasks.Add(subTask);
                 }
 
                 return tasks;

@@ -21,13 +21,13 @@ namespace ListTask.WebApi.Controllers
         [HttpGet]
         public IEnumerable<MainTask> ReadAll()
         {
-            return _repository.ReadAll();
+            return _repository.ReadAllMainTask();
         }
 
         [HttpGet("{id}")]
         public ActionResult<MainTask> ReadByld(int id)
         {
-            return Ok(_repository.ReadByld(id));
+            return Ok(_repository.ReadByldMainTask(id));
         }
 
         [HttpPost]
@@ -55,9 +55,11 @@ namespace ListTask.WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<MainTask> Delete(int id)
         {
+            MainTask maintask = _repository.ReadByldMainTask(id);
             _repository.Delete(id, TaskType.MainTask);
+            return Ok(maintask);
         }
     }
 }

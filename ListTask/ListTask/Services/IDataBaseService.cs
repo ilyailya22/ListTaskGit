@@ -21,6 +21,8 @@ namespace ListTask.Services
 
         public void DeleteSubtask(int id);
 
-        public List<MainTask> ReadAll();
+        public List<MainTask> ReadAllMainTask();
+
+        public List<SubTask> ReadAllSubTask();
     }
 }

@@ -56,6 +56,11 @@ namespace ListTask.Controllers
             }
         }
 
+        public void PrintAll()
+        {
+            _repository.ReadAll();
+        }
+
         public void Menu()
         {
             do
@@ -102,6 +107,12 @@ namespace ListTask.Controllers
                             break;
                         }
 
+                    case Constants.Printall:
+                        {
+                            _repository.ReadAll();
+                            break;
+                        }
+
                     case Constants.Exit: return;
 
                     default: break;
@@ -120,13 +131,13 @@ namespace ListTask.Controllers
             if (int.TryParse(Console.ReadLine(), out var parsenumber))
             {
                 number = parsenumber;
-                if (task == "maintask")
+                if (task == "mainTask")
                 {
                     taskType = TaskType.MainTask;
                     _repository.PrintByld(number, taskType);
                 }
 
-                if (task == "subtask")
+                if (task == "subTask")
                 {
                     taskType = TaskType.SubTask;
                     _repository.PrintByld(number, taskType);
@@ -145,13 +156,13 @@ namespace ListTask.Controllers
             TaskType taskType;
             if (int.TryParse(Console.ReadLine(), out var number))
             {
-                if (task == "maintask")
+                if (task == "mainTask")
                 {
                     taskType = TaskType.MainTask;
                     _repository.Delete(number, taskType);
                 }
 
-                if (task == "subtask")
+                if (task == "subTask")
                 {
                     taskType = TaskType.SubTask;
                     _repository.Delete(number, taskType);

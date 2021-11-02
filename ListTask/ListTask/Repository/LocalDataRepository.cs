@@ -115,5 +115,15 @@ namespace ListTask.Repository
                 }
             }
         }
+
+        public IEnumerable<MainTask> ReadAll()
+        {
+            return _taskRepository;
+        }
+
+        public MainTask ReadByld(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

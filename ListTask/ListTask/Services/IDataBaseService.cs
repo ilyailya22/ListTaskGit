@@ -1,4 +1,5 @@
-﻿using ListTask.Models;
+﻿using System.Collections.Generic;
+using ListTask.Models;
 
 namespace ListTask.Services
 {
@@ -19,5 +20,7 @@ namespace ListTask.Services
         public void DeleteTask(int id);
 
         public void DeleteSubtask(int id);
+
+        public List<MainTask> ReadAll();
     }
 }

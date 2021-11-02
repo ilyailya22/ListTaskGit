@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ListTask.Models;
 using ListTask.Services;
 using Newtonsoft.Json;
@@ -83,6 +84,16 @@ namespace ListTask.Repository
 
         public void Edit(BaseTask task)
         {
+        }
+
+        public IEnumerable<MainTask> ReadAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public MainTask ReadByld(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

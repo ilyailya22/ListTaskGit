@@ -27,7 +27,13 @@ namespace ListTask.WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<SubTask> ReadByld(int id)
         {
-            return Ok(_repository.ReadByldSubTask(id));
+            SubTask subTask = _repository.ReadByldSubTask(id);
+            if (subTask == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(subTask);
         }
 
         [HttpPost]
@@ -57,9 +63,14 @@ namespace ListTask.WebApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<SubTask> Delete(int id)
         {
-            SubTask subtask = _repository.ReadByldSubTask(id);
+            SubTask subTask = _repository.ReadByldSubTask(id);
+            if (subTask == null)
+            {
+                return BadRequest();
+            }
+
             _repository.Delete(id, TaskType.SubTask);
-            return Ok(subtask);
+            return Ok(subTask);
         }
     }
 }

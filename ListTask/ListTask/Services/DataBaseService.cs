@@ -106,14 +106,8 @@ namespace ListTask.Services
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                List<SubTask> tasks = new List<SubTask>();
                 var subTasks = db.SubTasks.ToList();
-                foreach (var subTask in subTasks)
-                {
-                    tasks.Add(subTask);
-                }
-
-                return tasks;
+                return subTasks;
             }
         }
     }

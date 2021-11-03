@@ -27,6 +27,13 @@ namespace ListTask.WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<MainTask> ReadByld(int id)
         {
+            MainTask mainTask = _repository.ReadByldMainTask(id);
+
+            if (mainTask == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(_repository.ReadByldMainTask(id));
         }
 
@@ -57,9 +64,15 @@ namespace ListTask.WebApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<MainTask> Delete(int id)
         {
-            MainTask maintask = _repository.ReadByldMainTask(id);
+            MainTask mainTask = _repository.ReadByldMainTask(id);
+
+            if (mainTask == null)
+            {
+                return BadRequest();
+            }
+
             _repository.Delete(id, TaskType.MainTask);
-            return Ok(maintask);
+            return Ok(mainTask);
         }
     }
 }
